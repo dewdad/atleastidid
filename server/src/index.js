@@ -4,6 +4,7 @@ const session = require('express-session')
 const cors = require('cors')
 const errorhandler = require('errorhandler')
 const app = express()
+const models = require('./models')
 const PORT = process.env.PORT || 4000
 
 const environment = process.env.NODE_ENV || null
@@ -17,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(express.static(__dirname + '/public'))
 
-require('./models')
+require('./routes/authentication')(app)
 
 app.get('/health', (req, res) => {
   return res.status(500).send({
@@ -44,6 +45,8 @@ if (environment !== 'production') {
   })
 }
 
-app.listen(PORT, () => {
-  console.log('thoughtsub web server listenting on port:', PORT)
+models.sequelizeInstance.sync().then(() => {
+  app.listen(PORT, () => {
+    console.log('thoughtsub web server listenting on port:', PORT)
+  })
 })

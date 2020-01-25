@@ -1,9 +1,5 @@
-const fs = require('fs')
-const path = require('path')
 const Sequelize = require('sequelize')
 const config = require('../config')
-
-const db = {}
 
 const sequelize = new Sequelize(
   config.db.name,
@@ -11,5 +7,14 @@ const sequelize = new Sequelize(
   config.db.password,
   config.db.options
 )
+  
+const models = {} 
+models.sequelizeInstance = sequelize
+models.User = require('./user')(sequelize)
 
-console.log(config.db)
+// const User = models.user.create({
+//   email: 'nher1625@gmail.com',
+//   password: 'password'
+// })
+console.log(models)
+module.exports = models
