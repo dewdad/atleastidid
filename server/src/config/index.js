@@ -11,6 +11,9 @@ module.exports = {
     options: {
       dialect: process.env.DB_DIALECT || 'mysql',
       host: process.env.DB_HOST || 'localhost'
-    }
+    },
+  },
+  auth: {
+    secret: process.env.SECRET || 'secret'
   }
 }

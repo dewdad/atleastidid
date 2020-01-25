@@ -16,5 +16,5 @@ models.User = require('./user')(sequelize)
 //   email: 'nher1625@gmail.com',
 //   password: 'password'
 // })
-console.log(models)
+// console.log(models)
 module.exports = models
