@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "The server of thoughtsub.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GitNey/thoughtsub.git"
+  },
+  "keywords": [
+    "Express.js"
+  ],
+  "author": "nher1625",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GitNey/thoughtsub/issues"
+  },
+  "homepage": "https://github.com/GitNey/thoughtsub#readme"
+}
