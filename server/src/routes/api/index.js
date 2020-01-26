@@ -3,6 +3,7 @@ const router = require('express').Router()
 router.use('/v1', require('./v1/authentication'))
 router.use('/v1', require('./v1/system'))
 router.use('/v1', require('./v1/users'))
+router.use('/v1', require('./v1/thoughts'))
 
 router.use(function (err, req, res, next) {
   if (err) {

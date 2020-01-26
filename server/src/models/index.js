@@ -11,10 +11,8 @@ const sequelize = new Sequelize(
 const models = {} 
 models.sequelizeInstance = sequelize
 models.User = require('./user')(sequelize)
+models.Thought = require('./thought')(sequelize)
 
-// const User = models.user.create({
-//   email: 'nher1625@gmail.com',
-//   password: 'password'
-// })
-// console.log(models)
+models.User.hasMany(models.Thought)
+
 module.exports = models

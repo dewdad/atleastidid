@@ -1,9 +1,6 @@
 const router = require('express').Router()
+const SystemController = require('../../../controllers/system')
 
-router.get('/health', (req, res) => {
-  return res.status(200).send({
-    message: 'It\'s alive Mr.Hernandez... It\'s alive.'
-  })
-})
+router.get('/health', SystemController.health)
 
 module.exports = router
