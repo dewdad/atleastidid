@@ -1,8 +1,8 @@
 const router = require('express').Router()
 
 router.get('/health', (req, res) => {
-  return res.status(500).send({
-    error: 'It\'s Alive!!!'
+  return res.status(200).send({
+    message: 'It\'s alive Mr.Hernandez... It\'s alive.'
   })
 })
 

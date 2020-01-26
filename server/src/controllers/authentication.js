@@ -59,5 +59,23 @@ module.exports = {
         error: 'User is unauthorized.'
       })
     }
+  },
+  authRequired (req, res, next) {
+    let auth = req.headers.authorization || req.headers.Authorization
+    if (auth) {
+      const token = req.headers.authorization.split(' ')[1]
+      jwt.verify(token, config.auth.secret, function(err, decoded) {
+        if (err) {
+          console.error(err)
+          req.token = null
+          return false
+        } else {
+          req.token = token
+          req.payload = decoded.user
+          return true
+        }
+      })
+    } 
+    next()
   }
 }

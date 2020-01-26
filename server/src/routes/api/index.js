@@ -2,11 +2,13 @@ const router = require('express').Router()
 
 router.use('/v1', require('./v1/authentication'))
 router.use('/v1', require('./v1/system'))
+router.use('/v1', require('./v1/users'))
 
 router.use(function (err, req, res, next) {
   if (err) {
-    return res.status(400).send({
-      error: 'Error from /routes/api/v1/index.js'
+    console.log('Last ERROR catch:', err)
+    return res.status(err.status || 500).send({
+      error: err.message
     })
   }
 
