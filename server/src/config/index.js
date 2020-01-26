@@ -14,6 +14,6 @@ module.exports = {
     },
   },
   auth: {
-    secret: process.env.SECRET || 'secret'
+    secret: process.env.SECRET || 'secreto'
   }
 }
