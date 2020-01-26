@@ -1,4 +1,5 @@
 const express = require('express')
+const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const cors = require('cors')
@@ -12,19 +13,15 @@ const environment = process.env.NODE_ENV || null
 if (environment === 'development') {
   app.use(cors())
   app.use(errorhandler())
+  app.use(morgan('combined'))
 }
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(express.static(__dirname + '/public'))
 
-require('./routes/authentication')(app)
-
-app.get('/health', (req, res) => {
-  return res.status(500).send({
-    error: 'It\'s Alive!!!'
-  })
-})
+// Routes
+app.use(require('./routes'))
 
 // catch 404, forward to error handler
 app.use((req, res, next) => {
