@@ -25,13 +25,13 @@ module.exports = (sequelizeInstance) => {
       type: Sequelize.STRING
     },
     author: {
-      type: Sequelize.STRING,
-      references: {
-        model: 'user',
-        key: 'id'
-      }
-    }    
+      type: Sequelize.STRING
+    }
   })
+
+  Thoughts.associate = function(models) {
+    Thoughts.belongsTo(models.User)
+  }
 
   return Thoughts
 }

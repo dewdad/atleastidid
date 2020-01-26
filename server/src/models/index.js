@@ -10,9 +10,14 @@ const sequelize = new Sequelize(
   
 const models = {} 
 models.sequelizeInstance = sequelize
-models.User = require('./user')(sequelize)
-models.Thought = require('./thought')(sequelize)
+const User = models.User = require('./user')(sequelize)
+const Thought = models.Thought = require('./thought')(sequelize)
 
-models.User.hasMany(models.Thought)
+Object.keys(models).forEach(function (modelName) {
+  if ('associate' in models[modelName]) {
+    console.log('associate!!', models[modelName])
+    models[modelName].associate(models)
+  }
+})
 
 module.exports = models

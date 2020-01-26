@@ -3,6 +3,8 @@ const Thought = require('../../../models').Thought
 const AuthController = require('../../../controllers/authentication')
 const ThoughtsController = require('../../../controllers/thoughts')
 
-router.post('/thoughts', AuthController.authRequired, ThoughtsController.createThought)
+router.get('/thoughts', AuthController.authRequired, ThoughtsController.index)
+
+router.post('/thoughts', AuthController.authRequired, ThoughtsController.create)
 
 module.exports = router

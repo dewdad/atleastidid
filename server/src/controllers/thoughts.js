@@ -1,5 +1,6 @@
 const models = require('../models')
 const Thought = models.Thought
+const User = models.User
 
 function slugify(string) {
   const a = 'àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõőṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;'
@@ -17,20 +18,48 @@ function slugify(string) {
 }
 
 module.exports = {
-  async createThought(req, res) {
+  async create(req, res) {
     try {
-      const thought = await Thought.create({
-        slug: slugify(req.body.title),
-        title: req.body.title,
-        description: req.body.description,
-        body: req.body.body
+      const user = await User.findOne({
+        where: { id: req.payload.id }
       })
-      res.status(200).send({ thought })
+      
+      if (user) {
+        var userId = user.id
+        let thought = await Thought.create({
+          slug: slugify(req.body.title),
+          title: req.body.title,  
+          description: req.body.description,
+          body: req.body.body,
+          author: user.username,
+          UserId: userId
+        })
+        res.status(200).send({ thought })
+      } else {
+        res.status(404).send({
+          message: `User was not found.`
+        })
+      }
     } catch (err) {
       console.error(err)
       res.status(500).send({
         error: err,
         message: 'Error creating new thought.'
+      })
+    }
+  },
+  async index(req, res) {
+    try {
+      let thoughts = await Thought.findAll({
+        where: { UserId: req.payload.id }
+      })
+      return res.status(200).send({
+        thoughts
+      })
+    } catch(err) {
+      res.status(500).send({
+        error: err,
+        message: 'Error fetching all thoughts.'
       })
     }
   }
