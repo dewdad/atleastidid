@@ -1,49 +1,65 @@
 <template>
-  <div class="container row">
-    <div class="card thought" v-for="thought in thoughts" :key="thought.id">
-      <div class="card-header">{{ thought.title }}</div>
-      <div class="card-body">{{ thought.body }}</div>
-      <div class="card-footer">
-        Who <i>thunk</i> it? - <span class="card__author-name">{{ thought.author }}</span>
-      </div>
+  <div class="container">
+    <div class="row">
+      <template v-if="thoughts.length">
+        <div class="card thought" v-for="thought in thoughts" :key="thought.id">
+          <div class="card-header">{{ thought.title }}</div>
+          <div class="card-body">{{ thought.body }}</div>
+          <div class="card-footer">
+            Who
+            <i>thunk</i> it? -
+            <span class="card__author-name">{{ thought.author }}</span>
+          </div>
+        </div>
+      </template>
+      <template v-else>
+        <div class="alert alert-default w-100">
+          <p class="text-center">You haven't shared any thoughts.</p>
+          <a
+            href
+            @click="$router.push({ name: 'create-thought' })"
+            class="btn btn-primary"
+          >Create a Thought</a>
+        </div>
+      </template>
     </div>
   </div>
 </template>
 
 <script>
-import ThoughtsService from '@/services/thoughts' 
+import ThoughtsService from "@/services/thoughts";
 export default {
-  name: 'thoughts-list',
-  data () {
+  name: "thoughts-list",
+  data() {
     return {
       thoughts: null
-    }
+    };
   },
   methods: {
-    async fetchAllThoughts () {
+    async fetchAllThoughts() {
       try {
-        let response = await ThoughtsService.getAllThoughts()
+        let response = await ThoughtsService.getAllThoughts();
         if (response.status === 200) {
-          this.thoughts = response.data.thoughts
+          this.thoughts = response.data.thoughts;
         }
-      } catch(err) {
-        window.console.error(err)
+      } catch (err) {
+        window.console.error(err);
       }
     }
   },
-  mounted () {
-    if (this.$store.state.auth.userLoggedIn) this.fetchAllThoughts()
+  mounted() {
+    if (this.$store.state.auth.userLoggedIn) this.fetchAllThoughts();
   }
-}
+};
 </script>
 
 <style scoped>
-  .card.thought {
-    width: 250px;
-    margin: 0 15px;
-  }
-  .card-header,
-  .card__author-name {
-    text-transform: capitalize
-  }
+.card.thought {
+  width: 250px;
+  margin: 0 15px;
+}
+.card-header,
+.card__author-name {
+  text-transform: capitalize;
+}
 </style>
