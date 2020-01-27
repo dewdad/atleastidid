@@ -8,6 +8,12 @@ Vue.config.productionTip = false
 
 sync(store, router)
 
+router.beforeEach((to, from, next) => {
+  if (localStorage.getItem('token')) {
+    store.dispatch('auth/checkUserState').then(next)
+  } else next()
+})
+
 new Vue({
   router,
   store,
