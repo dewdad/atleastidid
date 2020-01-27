@@ -61,6 +61,7 @@ module.exports = {
   },
   authRequired (req, res, next) {
     let auth = req.headers.authorization || req.headers.Authorization
+    console.log('authRequired:', req.headers)
     if (auth) {
       const token = req.headers.authorization.split(' ')[1]
       jwt.verify(token, config.auth.secret, function(err, decoded) {

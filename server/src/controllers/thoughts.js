@@ -23,7 +23,7 @@ module.exports = {
       const user = await User.findOne({
         where: { id: req.payload.id }
       })
-      
+      console.log(user, req.payload)
       if (user) {
         var userId = user.id
         let thought = await Thought.create({
@@ -31,7 +31,7 @@ module.exports = {
           title: req.body.title,  
           description: req.body.description,
           body: req.body.body,
-          author: user.username,
+          author: user.email,
           UserId: userId
         })
         res.status(200).send({ thought })

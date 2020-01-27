@@ -6,6 +6,8 @@
     <div class="row">
       <div v-show="loggedIn" class="col thoughts">
         <em><span class="h1">All the</span> <b>Latest Thoughts</b></em>
+        <br>
+        <br>
         <ts-thoughts-list />
       </div>
       <div v-show="!loggedIn" class="col welcome">

@@ -1,12 +1,12 @@
 import UserServices from '@/services/user'
 
 const token = localStorage.getItem('token')
-window.console.log('token:', token)
+window.console.log('token:', token === 'undefined')
 
 export default {
   namespaced: true,
   state: {
-    token: (token !== undefined) ? token : null,
+    token: (token !== 'undefined') ? token : null,
     userLoggedIn: (token) ? true : false
   },
   getters: {
@@ -32,25 +32,22 @@ export default {
     logout({ commit }) {
       commit('resetUserToken')
     },
-    async checkUserState({ commit }) {
-      // try {
-      if (localStorage.getItem('token')) {
+    async checkUserState({ commit, state }) {
+      window.console.log(state.token)
+      if (state.token) {
         window.console.log('Checking user state...')
         await UserServices.statUser().then(response => {
           window.console.log('checkUserState (action):', response)
+          window.console.log('user is authenticated in system')
+        }).catch(err => {
+          commit('resetUserToken')
+          window.console.log('user is not authenticated in system', err)
         })
-        // if (response.status === 200) {
-        //   commit('setUserToken', response.data.token)
-        //   alert('user is authenticated in system')
-        // }
       } else {
+        window.console.log('ok')
         commit('resetUserToken')
-        alert('user is not authenticated in system')
+        window.console.log('user is not authenticated in system')
       }
-      // } catch (err) {
-      //   window.console.log(err)
-      // }
-
     }
   }
 }

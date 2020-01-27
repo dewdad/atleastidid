@@ -31,8 +31,8 @@ export default {
       }
     }
   },
-  created () {
-    this.fetchAllThoughts()
+  mounted () {
+    if (this.$store.state.auth.userLoggedIn) this.fetchAllThoughts()
   }
 }
 </script>
@@ -40,6 +40,7 @@ export default {
 <style scoped>
   .card.thought {
     width: 250px;
+    margin: 0 15px;
   }
   .card-header,
   .card__author-name {

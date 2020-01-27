@@ -9,7 +9,7 @@
       <!-- <router-link to="/">Home</router-link>| -->
       <router-link v-show="!loggedIn" to="/login">Login</router-link>
       <router-link v-show="!loggedIn" to="/register">Register</router-link>
-      <router-link to="/share-a-thought">Submit Thought</router-link>
+      <router-link v-show="loggedIn" to="/share-a-thought">Submit Thought</router-link>
       <a href="" v-show="loggedIn" @click="logout">Logout</a>
     </div>
   </div>

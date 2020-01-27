@@ -19,20 +19,10 @@
         placeholder="Password"
         required
       />
-
-      <button @click.prevent="login" class="btn btn-success btn-block" type="submit">
-        <i class="fas fa-sign-in-alt"></i> Sign in
+      <button @click.prevent="register" class="btn btn-success btn-block" type="submit">
+        <i class="fas fa-sign-in-alt"></i> Sign Up
       </button>
-      <a href="#" id="forgot_pswd">Forgot password?</a>
       <hr />
-      <!-- <p>Don't have an account!</p>  -->
-      <button
-        @click="$router.push({ name: 'register' })"
-        class="btn btn-primary btn-block"
-        type="button"
-        id="btn-signup">
-        <i class="fas fa-user-plus"></i> New Account
-      </button>
     </form>
   </div>
 </template>
@@ -50,16 +40,13 @@ export default {
     }
   },
   methods: {
-    async login () {
+    async register () {
       try {
         let creds = { email: this.email, password: this.password }
-        const response = await AuthService.login(creds)
+        const response = await AuthService.register(creds)
         if (response.status === 200) {
-          alert('User logged in!')
           window.console.log(response.data)
-          this.$store
-            .dispatch('auth/setAuthToken', response.data.token)
-            .then(() => this.$router.push({ name: 'home' }))
+          this.$router.push({ name: 'login' })
         }
       } catch(err) {
         this.error = err

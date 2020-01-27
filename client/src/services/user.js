@@ -5,6 +5,6 @@ export default {
         let headers = {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
-        return Api().get('user/', { headers })
+        return Api().get('user', { headers })
     }
 }
