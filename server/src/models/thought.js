@@ -26,6 +26,11 @@ module.exports = (sequelizeInstance) => {
     },
     author: {
       type: Sequelize.STRING
+    },
+    UserId: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      foreignKey: true
     }
   })
 

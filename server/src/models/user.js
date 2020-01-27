@@ -14,19 +14,9 @@ module.exports = (sequelizeInstance) => {
     {
       id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
+        auto_increment: true,
         primaryKey: true
-      },
-      username: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-        set: function(val) {
-          this.setDataValue(
-            'username',
-            val.toLowerCase()
-          )
-        },
       },
       email: {
         type: Sequelize.STRING,
