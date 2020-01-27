@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/components/Home.vue'
 import Login from '@/components/Login.vue'
+import Register from '@/components/Register.vue'
 
 Vue.use(VueRouter)
 
@@ -18,6 +19,11 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: Login
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: Register
   }
 ]
 

@@ -10,12 +10,13 @@ const PORT = process.env.PORT || 4000
 
 const environment = process.env.NODE_ENV || null
 
+
 if (environment === 'development') {
-  app.use(cors())
   app.use(errorhandler())
   app.use(morgan('combined'))
 }
 
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(express.static(__dirname + '/public'))

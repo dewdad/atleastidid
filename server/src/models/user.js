@@ -12,12 +12,6 @@ const hashPassword = (user, opts) => {
 module.exports = (sequelizeInstance) => {
   let Users = sequelizeInstance.define('Users', 
     {
-      id: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        auto_increment: true,
-        primaryKey: true
-      },
       email: {
         type: Sequelize.STRING,
         unique: true,

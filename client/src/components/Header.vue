@@ -7,15 +7,31 @@
     </div>
     <div class="nav__right">
       <!-- <router-link to="/">Home</router-link>| -->
-      <router-link to="/login">Login</router-link>|
-      <router-link to="/register">Register</router-link>
+      <router-link v-show="!loggedIn" to="/login">Login</router-link>
+      <router-link v-show="!loggedIn" to="/register">Register</router-link>
+      <router-link to="/share-a-thought">Submit Thought</router-link>
+      <a href="" v-show="loggedIn" @click="logout">Logout</a>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "ts-header"
+  name: "ts-header",
+  computed: {
+    loggedIn () {
+      return this.$store.state.auth.userLoggedIn
+    }
+  },
+  methods: {
+    logout () {
+      this.$store.dispatch('auth/logout').then(() => {
+        if (!this.$store.auth.state.userLoggedIn) {
+          this.$router.push({ name: 'home' })
+        }
+      })
+    }
+  }
 };
 </script>
 

@@ -1,7 +1,11 @@
 <template>
   <div class="container row">
     <div class="card thought" v-for="thought in thoughts" :key="thought.id">
+      <div class="card-header">{{ thought.title }}</div>
       <div class="card-body">{{ thought.body }}</div>
+      <div class="card-footer">
+        Who <i>thunk</i> it? - <span class="card__author-name">{{ thought.author }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -36,5 +40,9 @@ export default {
 <style scoped>
   .card.thought {
     width: 250px;
+  }
+  .card-header,
+  .card__author-name {
+    text-transform: capitalize
   }
 </style>

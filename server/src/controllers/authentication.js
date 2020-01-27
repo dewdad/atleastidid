@@ -19,6 +19,7 @@ module.exports = {
       const user = await User.create(req.body)
       res.status(200).send({ user })
     } catch (err) {
+      console.log(err, '\n\n\n')
       res.status(400).send({
         error: err,
         message: 'This email account is already in use.'

@@ -4,7 +4,11 @@
       <ts-banner :path="$route.path" />
     </div>
     <div class="row">
-      <div class="col welcome">
+      <div v-show="loggedIn" class="col thoughts">
+        <em><span class="h1">All the</span> <b>Latest Thoughts</b></em>
+        <ts-thoughts-list />
+      </div>
+      <div v-show="!loggedIn" class="col welcome">
         <em><span class="h1">Welcome to</span> <b>ThoughtSub.</b></em>
         <br>
         <br>
@@ -16,17 +20,25 @@
 
 <script>
 import Banner from '@/components/Banner'
+import ThoughtsList from '@/components/ThoughtsList'
 
 export default {
   name: 'home',
+  computed: {
+    loggedIn () {
+      return this.$store.state.auth.userLoggedIn
+    }
+  },
   components: {
-    'ts-banner': Banner
+    'ts-banner': Banner,
+    'ts-thoughts-list': ThoughtsList
   }
 }
 </script>
 
 <style>
-.col.welcome {
+.col.welcome,
+.col.thoughts {
   padding-top: 20px;
 }
 </style>
