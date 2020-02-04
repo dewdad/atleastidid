@@ -1,14 +1,13 @@
 <template>
   <div class="container">
-    <div class="row">
+    <div class="row flex">
       <template v-if="thoughts.length">
         <div class="card thought" v-for="thought in thoughts" :key="thought.id">
-          <div class="card-header">{{ thought.title }}</div>
+          <div class="card-header"><b>{{ thought.title }}</b></div>
           <div class="card-body">{{ thought.body }}</div>
           <div class="card-footer">
-            Who
-            <i>thunk</i> it? -
-            <span class="card__author-name">{{ thought.author }}</span>
+            <span class="card__author-name text-muted">You: </span>
+            <small class="card__created">{{ createdAtFormat(thought.createdAt) }}</small>
           </div>
         </div>
       </template>
@@ -32,7 +31,7 @@ export default {
   name: "thoughts-list",
   data() {
     return {
-      thoughts: null
+      thoughts: []
     };
   },
   methods: {
@@ -45,6 +44,12 @@ export default {
       } catch (err) {
         window.console.error(err);
       }
+    },
+    createdAtFormat (dateStr) {
+      let d = new Date(dateStr)
+      let date = d.toLocaleDateString()
+      let time = d.toLocaleTimeString()
+      return `${date} | ${time}`
     }
   },
   mounted() {
@@ -56,10 +61,16 @@ export default {
 <style scoped>
 .card.thought {
   width: 250px;
+  min-height: 250px;
   margin: 0 15px;
 }
 .card-header,
 .card__author-name {
   text-transform: capitalize;
+}
+.row.flex {
+  padding: 20px 0;
+  align-items: center;
+  flex-flow: wrap
 }
 </style>

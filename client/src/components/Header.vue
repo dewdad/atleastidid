@@ -7,6 +7,7 @@
     </div>
     <div class="nav__right">
       <!-- <router-link to="/">Home</router-link>| -->
+      <router-link to="/">Home</router-link>
       <router-link v-show="!loggedIn" to="/login">Login</router-link>
       <router-link v-show="!loggedIn" to="/register">Register</router-link>
       <router-link v-show="loggedIn" to="/share-a-thought">Submit Thought</router-link>
