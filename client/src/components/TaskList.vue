@@ -2,29 +2,29 @@
   <div id="task-list-component" class="container-fluid">
     <span>All of your <b>Latest Tasks</b></span>
     <div class="row flex">
-      <template v-if="hasThoughts">
+      <template v-if="hasTasks">
       <div class="col-12">
         <ul class="list-group">
           <li
-            v-for="thought in thoughts" 
-            :key="thought.id" 
+            v-for="task in tasks" 
+            :key="task.id" 
             class="list-group-item">
             <div class="row position-relative">
               <div class="col">
                 <div class="title">
-                  <b>Title:</b> {{ thought.title }}
+                  <b>Title:</b> {{ task.title }}
                 </div>
                 <div class="content">
-                  <b>Body:</b> {{ thought.body }}
+                  <b>Body:</b> {{ task.body }}
                 </div>
               </div>
               <div class="col">
-                <p><b>Created:</b> {{ createdAtFormat(thought.createdAt) }}</p>
+                <p><b>Created:</b> {{ createdAtFormat(task.createdAt) }}</p>
                 <a
                   href="#"
                   class="btn btn-danger position-absolute"
                   style="right: 0; top: 0;"
-                  @click.prevent="deleteThought(thought.id)">Delete</a>
+                  @click.prevent="deleteTask(task.id)">Delete</a>
               </div>
             </div>
           </li>
@@ -33,12 +33,12 @@
       </template>
       <template v-else>
         <div class="alert alert-default w-100">
-          <p class="text-center">You haven't shared any thoughts.</p>
+          <p class="text-center">You haven't shared any tasks.</p>
           <a
             href=""
-            @click.prevent="$router.push({ name: 'create-thought' })"
+            @click.prevent="$router.push({ name: 'create-task' })"
             class="btn btn-primary"
-          >Create a Thought</a>
+          >Create a Task</a>
         </div>
       </template>
     </div>
@@ -46,39 +46,39 @@
 </template>
 
 <script>
-import ThoughtsService from "@/services/thoughts";
+import TasksService from "@/services/tasks";
 export default {
-  name: "thoughts-list",
+  name: "tasks-list",
   data() {
     return {
-      thoughts: []
+      tasks: []
     };
   },
   computed: {
-    hasThoughts() {
-      if (this.thoughts.length > 0) return true
+    hasTasks() {
+      if (this.tasks.length > 0) return true
       return false
     }
   },
   methods: {
-    async fetchAllThoughts() {
+    async fetchAllTasks() {
       try {
-        let response = await ThoughtsService.getAllThoughts();
+        let response = await TasksService.getAllTasks();
         if (response.status === 200) {
-          window.console.log('Loading thoughts:', response.data.thoughts)
-          this.thoughts = response.data.thoughts;
+          window.console.log('Loading tasks:', response.data.tasks)
+          this.tasks = response.data.tasks;
         }
       } catch (err) {
         window.console.error(err);
       }
     },
-    async deleteThought(id) {
+    async deleteTask(id) {
       try {
-        window.console.log("Deleting thought: " + id + "...");
-        let response = await ThoughtsService.deleteThought(id);
+        window.console.log("Deleting task: " + id + "...");
+        let response = await TasksService.deleteTask(id);
         if (response.status === 200) {
-          window.console.log('Thought deleted...')
-          this.thoughts = await this.fetchAllThoughts();
+          window.console.log('Task deleted...')
+          this.tasks = await this.fetchAllTasks();
         }
       } catch (err) {
         window.console.error(err);
@@ -92,36 +92,9 @@ export default {
     }
   },
   mounted() {
-    if (this.$store.state.auth.userLoggedIn) this.fetchAllThoughts();
+    if (this.$store.state.auth.userLoggedIn) this.fetchAllTasks();
   }
 };
 </script>
 
-<style scoped>
-.card.thought {
-  width: 250px;
-  min-height: 250px;
-  margin: 0 15px;
-}
-.card-header,
-.card__author-name {
-  text-transform: capitalize;
-}
-.row.flex {
-  padding: 20px 0;
-  align-items: center;
-  flex-flow: wrap;
-}
-.clickable:hover {
-  cursor: pointer;
-  color: crimson;
-}
-.card {
-  position: relative;
-}
-.close-icon {
-  position: absolute;
-  right: 5px;
-  top: 0px;
-}
-</style>
+<style scoped></style>

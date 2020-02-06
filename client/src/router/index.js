@@ -29,7 +29,7 @@ const routes = [
   },
   {
     path: '/add-task',
-    name: 'add-task',
+    name: 'create-task',
     component: CreateTask,
     beforeEnter: (to, from, next) => {
       if (store.state.auth.userLoggedIn) next()

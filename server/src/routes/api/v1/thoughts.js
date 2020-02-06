@@ -1,11 +1,11 @@
 const router = require('express').Router()
 const AuthController = require('../../../controllers/authentication')
-const ThoughtsController = require('../../../controllers/thoughts')
+const TasksController = require('../../../controllers/tasks')
 
-router.get('/thoughts', AuthController.authRequired, ThoughtsController.index)
+router.get('/tasks', AuthController.authRequired, TasksController.index)
 
-router.post('/thoughts', AuthController.authRequired, ThoughtsController.create)
+router.post('/tasks', AuthController.authRequired, TasksController.create)
 
-router.delete('/thoughts/:id', AuthController.authRequired, ThoughtsController.delete)
+router.delete('/tasks/:id', AuthController.authRequired, TasksController.delete)
 
 module.exports = router

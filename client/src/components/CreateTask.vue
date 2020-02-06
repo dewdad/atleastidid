@@ -1,12 +1,12 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <ts-banner />
+      <banner />
     </div>
-    <div class="container row">
-      <div class="col create-thought">
+    <div class="row">
+      <div class="col">
         <h2>Create and Submit a New Task</h2>
-        <form class="form create-thought text-left">
+        <form class="form text-left">
           <div class="form-group">
             <label for="title">Title</label>
             <input v-model="title" type="text" class="form-control" id="title" name="title" />
@@ -19,7 +19,7 @@
             <label for="body">Body</label>
             <textarea v-model="body" class="form-control" id="body" name="body" />
           </div>
-          <button @click.prevent="submitThought" type="submit" class="btn btn-primary">Submit</button>
+          <button @click.prevent="submitTask" type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
     </div>
@@ -28,10 +28,10 @@
 
 <script>
 import Banner from "@/components/Banner"
-import ThoughtServices from "@/services/thoughts"
+import TasksServices from "@/services/tasks"
 
 export default {
-  name: "create-thought",
+  name: "create-task",
   data () {
     return {
       title: null,
@@ -40,14 +40,14 @@ export default {
     }
   },
   methods: {
-    async submitThought () {
+    async submitTask () {
       try {
-        const thought = {
+        const task = {
           title: this.title,
           description: this.description,
           body: this.body
         }
-        await ThoughtServices.createThought(thought).then(response => {
+        await TasksServices.createTask(task).then(response => {
           if (response.status === 200) this.$router.push({ name: 'home' })
         })    
       } catch(err) {
@@ -56,17 +56,7 @@ export default {
     }
   },
   components: {
-    "ts-banner": Banner
+    "banner": Banner
   }
 };
 </script>
-
-<style scoped>
-.col.create-thought {
-  padding-top: 20px;
-}
-.form.create-thought {
-  width: 960px;
-  margin: 0 auto;
-}
-</style>

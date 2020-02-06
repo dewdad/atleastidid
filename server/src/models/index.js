@@ -11,7 +11,7 @@ const sequelize = new Sequelize(
 const models = {} 
 models.sequelizeInstance = sequelize
 const User = models.User = require('./user')(sequelize)
-const Thought = models.Thought = require('./thought')(sequelize)
+const Task = models.Task = require('./task')(sequelize)
 
 Object.keys(models).forEach(function (modelName) {
   if ('associate' in models[modelName]) {

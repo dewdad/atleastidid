@@ -1,5 +1,5 @@
 const models = require('../models')
-const Thought = models.Thought
+const Task = models.Task
 const User = models.User
 
 function slugify(string) {
@@ -26,7 +26,7 @@ module.exports = {
       console.log(user, req.payload)
       if (user) {
         var userId = user.id
-        let thought = await Thought.create({
+        let task = await Task.create({
           slug: slugify(req.body.title),
           title: req.body.title,  
           description: req.body.description,
@@ -34,7 +34,7 @@ module.exports = {
           author: user.email,
           UserId: userId
         })
-        res.status(200).send({ thought })
+        res.status(200).send({ task })
       } else {
         res.status(404).send({
           message: `User was not found.`
@@ -44,42 +44,42 @@ module.exports = {
       console.error(err)
       res.status(500).send({
         error: err,
-        message: 'Error creating new thought.'
+        message: 'Error creating new task.'
       })
     }
   },
   async index(req, res) {
     try {
-      let thoughts = await Thought.findAll({
+      let tasks = await Task.findAll({
         where: { UserId: req.payload.id }
       })
       return res.status(200).send({
-        thoughts
+        tasks
       })
     } catch(err) {
       res.status(500).send({
         error: err,
-        message: 'Error fetching all thoughts.'
+        message: 'Error fetching all tasks.'
       })
     }
   },
   async delete(req, res) {
     try {
       console.log('Delete: ', req.params)
-      let thought = await Thought.destroy({
+      let task = await Task.destroy({
         where: { 
           id: req.params.id
         }
       })
       
-      console.log('Thought:', thought)
+      console.log('Task:', task)
       return res.status(200).send({
-        message: 'Deleted thought: ' + req.params.id
+        message: 'Deleted task: ' + req.params.id
       })
     } catch(err) {
       res.status(500).send({
         error: err,
-        message: 'Error deleting thought: ' + req.params.id
+        message: 'Error deleting task: ' + req.params.id
       })
     }
   }

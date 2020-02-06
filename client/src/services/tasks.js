@@ -1,23 +1,23 @@
 import Api from './api'
 
 export default {
-  async createThought(thought) {
+  async createTask(task) {
     const headers = {
       'Authorization': `Bearer ${localStorage.getItem('token')}`
     }
     window.console.log(headers)
-    return Api().post('/thoughts', thought, { headers })
+    return Api().post('/tasks', task, { headers })
   },
-  async getAllThoughts() {
+  async getAllTasks() {
     const headers = {
       'Authorization': `Bearer ${localStorage.getItem('token')}`
     }
-    return Api().get('thoughts', { headers })
+    return Api().get('tasks', { headers })
   },
-  async deleteThought(id) {
+  async deleteTask(id) {
     const headers = {
       'Authorization': `Bearer ${localStorage.getItem('token')}`
     }
-    return Api().delete('thoughts/' + id, { headers })
+    return Api().delete('tasks/' + id, { headers })
   }
 }

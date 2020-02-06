@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 
 module.exports = (sequelizeInstance) => {
-  let Thoughts = sequelizeInstance.define('Thoughts', {
+  let Task = sequelizeInstance.define('Tasks', {
     slug: {
       type: Sequelize.STRING,
       unique: true,
@@ -34,9 +34,9 @@ module.exports = (sequelizeInstance) => {
     }
   })
 
-  Thoughts.associate = function(models) {
-    Thoughts.belongsTo(models.User)
+  Task.associate = function(models) {
+    Task.belongsTo(models.User)
   }
 
-  return Thoughts
+  return Task
 }
