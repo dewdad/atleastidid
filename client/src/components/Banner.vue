@@ -3,17 +3,19 @@
     <ts-breadcrumb :path="$route.path" />
   </div>-->
   <div class="py-6 py-sm-8">
-    <div :class="`container-lg p-responsive position-relative ${(loggedIn) ? 'py-5' : ''}`">
-      <div class="d-md-flex flex-items-center align-items-center">
-        <div class="col-md-7 text-center text-md-left">
-          <h1 class="page-title mb-3">Built for the Self-Disciplined</h1>
+    <div v-if="!loggedIn" :class="`container-lg p-responsive position-relative ${(loggedIn) ? 'py-5' : ''}`">
+      <div class="jumbo-registration-wrapper d-md-flex flex-items-center align-items-center">
+        <!-- Jumbotron -->
+        <jumbotron title="Planning for the Self-Disciplined">
           <p class="mb-4">
             AtleastIDid is a task management platform inspired by the way you work. From
             <a href="#" class="jumbotron-link">Goal Creation</a> to
             <a href="#" class="jumbotron-link">Goal Completion</a>, you can track and audit yourself, manage projects, and build your self-discipline alongside 40 million&nbsp;users.
           </p>
-        </div>
-        <div v-show="!loggedIn" class="mx-auto col-sm-8 col-md-6 hide-sm">
+        </jumbotron>
+        <!-- ./Jumbotron -->
+        <!-- Register Form -->
+        <div class="mx-auto col-sm-8 col-md-6 hide-sm">
           <div class="rounded-bottom text-white bg-dark py-4 px-4 px-md-3 px-lg-4">
             <form
               class="home-hero-signup"
@@ -119,20 +121,25 @@
             href="#"
           >Sign up for GitHub</a>
         </div>
+        <!-- ./Register Form -->
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Jumbotron from '@/components/Jumbotron'
 // import Breadcrumbs from '@/components/Breadcrumbs'
 export default {
   name: "banner",
+  components: {
+    Jumbotron
+  },
   computed: {
     loggedIn () {
       return this.$store.getters["auth/loggedIn"]
     }
-  }
+  },
 };
 </script>
 
