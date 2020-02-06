@@ -10,7 +10,7 @@ export default {
     userLoggedIn: (token) ? true : false
   },
   getters: {
-    loggedIn: (state) => state.loggedIn
+    loggedIn: (state) => state.userLoggedIn
   },
   mutations: {
     setUserToken(state, token) {

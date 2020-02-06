@@ -4,7 +4,7 @@ import store from '@/store'
 import Home from '@/components/Home.vue'
 import Login from '@/components/Login.vue'
 import Register from '@/components/Register.vue'
-import CreateThought from '@/components/CreateThought.vue'
+import CreateTask from '@/components/CreateTask.vue'
 
 Vue.use(VueRouter)
 
@@ -28,9 +28,9 @@ const routes = [
     component: Register
   },
   {
-    path: '/share-a-thought',
-    name: 'create-thought',
-    component: CreateThought,
+    path: '/add-task',
+    name: 'add-task',
+    component: CreateTask,
     beforeEnter: (to, from, next) => {
       if (store.state.auth.userLoggedIn) next()
       else next('/login') 

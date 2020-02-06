@@ -62,5 +62,25 @@ module.exports = {
         message: 'Error fetching all thoughts.'
       })
     }
+  },
+  async delete(req, res) {
+    try {
+      console.log('Delete: ', req.params)
+      let thought = await Thought.destroy({
+        where: { 
+          id: req.params.id
+        }
+      })
+      
+      console.log('Thought:', thought)
+      return res.status(200).send({
+        message: 'Deleted thought: ' + req.params.id
+      })
+    } catch(err) {
+      res.status(500).send({
+        error: err,
+        message: 'Error deleting thought: ' + req.params.id
+      })
+    }
   }
 }

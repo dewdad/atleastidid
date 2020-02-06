@@ -13,5 +13,11 @@ export default {
       'Authorization': `Bearer ${localStorage.getItem('token')}`
     }
     return Api().get('thoughts', { headers })
+  },
+  async deleteThought(id) {
+    const headers = {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    }
+    return Api().delete('thoughts/' + id, { headers })
   }
 }

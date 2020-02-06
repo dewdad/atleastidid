@@ -3,9 +3,9 @@
     <div class="row">
       <ts-banner />
     </div>
-    <div class="row">
+    <div class="container row">
       <div class="col create-thought">
-        <h2>Create and Submit a New Thought</h2>
+        <h2>Create and Submit a New Task</h2>
         <form class="form create-thought text-left">
           <div class="form-group">
             <label for="title">Title</label>

@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "The server of thoughtsub.",
+  "description": "The server of atleastidid.",
   "main": "./src/index.js",
   "scripts": {
     "dev": "NODE_ENV='development' nodemon ./src/app.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GitNey/thoughtsub.git"
+    "url": "git+https://github.com/GitNey/atleastidid.git"
   },
   "keywords": [
     "Express.js"
@@ -17,9 +17,9 @@
   "author": "nher1625",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/GitNey/thoughtsub/issues"
+    "url": "https://github.com/GitNey/atleastidid/issues"
   },
-  "homepage": "https://github.com/GitNey/thoughtsub#readme",
+  "homepage": "https://github.com/GitNey/atleastidid#readme",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.19.0",

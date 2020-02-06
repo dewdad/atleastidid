@@ -1,13 +1,11 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <ts-banner :path="$route.path" />
+      <banner :path="$route.path" />
     </div>
     <div class="row">
       <div v-show="loggedIn" class="col thoughts">
-        <em><span class="h1">All of your</span> <b>Latest Thoughts</b></em>
-        <br>
-        <ts-thoughts-list />
+        <task-list />
       </div>
       <div v-show="!loggedIn" class="col welcome">
         <em><span class="h1">Welcome to</span> <b>ThoughtSub.</b></em>
@@ -26,7 +24,7 @@
 
 <script>
 import Banner from '@/components/Banner'
-import ThoughtsList from '@/components/ThoughtsList'
+import TaskList from '@/components/TaskList'
 
 export default {
   name: 'home',
@@ -36,8 +34,8 @@ export default {
     }
   },
   components: {
-    'ts-banner': Banner,
-    'ts-thoughts-list': ThoughtsList
+    'banner': Banner,
+    'task-list': TaskList
   }
 }
 </script>
