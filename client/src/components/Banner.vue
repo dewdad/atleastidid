@@ -3,7 +3,7 @@
     <ts-breadcrumb :path="$route.path" />
   </div>-->
   <div class="py-6 py-sm-8">
-    <div :class="`container-lg p-responsive position-relative ${(loggedIn) ? 'py-5' : ''}`">
+    <div class="container-lg p-responsive position-relative">
       <div class="jumbo-registration-wrapper d-md-flex flex-items-center align-items-center">
         <!-- Jumbotron -->
         <jumbotron title="Planning for the Self-Disciplined">
@@ -134,12 +134,7 @@ export default {
   name: "banner",
   components: {
     Jumbotron
-  },
-  computed: {
-    loggedIn () {
-      return this.$store.getters["auth/loggedIn"]
-    }
-  },
+  }
 };
 </script>
 

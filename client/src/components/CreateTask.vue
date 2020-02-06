@@ -1,11 +1,12 @@
 <template>
   <div class="container-fluid">
-    <div class="row">
+    <div v-if="!$helpers.loggedIn()" class="row">
       <banner />
     </div>
-    <div class="row">
+    <div class="row py-5">
       <div class="col">
-        <h2>Create and Submit a New Task</h2>
+        <h2 class="page-title">Create and Submit a New Task</h2>
+        <hr>
         <form class="form text-left">
           <div class="form-group">
             <label for="title">Title</label>

@@ -1,5 +1,5 @@
 <template>
-  <div id="task-list-component" class="container-fluid">
+  <div id="task-list-component" class="container-fluid py-5">
     <span>All of your <b>Latest Tasks</b></span>
     <div class="row flex">
       <template v-if="hasTasks">
