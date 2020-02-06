@@ -62,7 +62,7 @@
 
 <script>
 export default {
-  name: "ts-header",
+  name: "header",
   computed: {
     loggedIn () {
       return this.$store.state.auth.userLoggedIn

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <ts-header />
+    <Header />
     <router-view/>
   </div>
 </template>
@@ -10,7 +10,7 @@ import Header from '@/components/Header'
 export default {
   name: 'app',
   components: {
-    'ts-header': Header
+    Header
   }
 }
 </script>

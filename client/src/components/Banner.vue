@@ -3,7 +3,7 @@
     <ts-breadcrumb :path="$route.path" />
   </div>-->
   <div class="py-6 py-sm-8">
-    <div v-if="!loggedIn" :class="`container-lg p-responsive position-relative ${(loggedIn) ? 'py-5' : ''}`">
+    <div :class="`container-lg p-responsive position-relative ${(loggedIn) ? 'py-5' : ''}`">
       <div class="jumbo-registration-wrapper d-md-flex flex-items-center align-items-center">
         <!-- Jumbotron -->
         <jumbotron title="Planning for the Self-Disciplined">

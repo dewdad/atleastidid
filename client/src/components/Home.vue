@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <div class="row">
+    <div v-if="!loggedIn" class="row">
       <banner :path="$route.path" />
     </div>
     <div class="row">
