@@ -31,7 +31,7 @@ export default {
             if (this.completed) {
               this.$store.commit('notices/addNotice', { message: response.data.message })
             }
-            // this.$emit('task-complete')
+            this.$emit('taskMarked')
           }
         })
         .catch(err => {

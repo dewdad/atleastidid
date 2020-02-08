@@ -8,7 +8,7 @@
           <li
             v-for="task in tasks" 
             :key="task.id" 
-            class="list-group-item"
+            :class="`list-group-item task-${task.id}`"
             :data-id="task.id">
             <div class="row position-relative">
               <div class="col">
@@ -21,12 +21,13 @@
               </div>
               <div class="col">
                 <p><b>Created:</b> {{ createdAtFormat(task.createdAt) }}</p>
+                <p v-if="completedTime"><b>Completed:</b> {{ completedTime.split(',')[0] +  " | " + completedTime.split(',')[1] }}</p>
                 <a
                   href="#"
                   class="btn btn-danger position-absolute"
                   style="right: 0; top: 0;"
                   @click.prevent="deleteTask(task.id)">Delete</a>
-                  <TaskCheckbox :task="task" />
+                  <TaskCheckbox :task="task" @taskMarked="taskWasMarked(task)" />
               </div>
             </div>
           </li>
@@ -54,6 +55,7 @@ export default {
   name: "tasks-list",
   data() {
     return {
+      completedTime: null,
       tasks: []
     };
   },
@@ -67,6 +69,21 @@ export default {
     }
   },
   methods: {
+    taskWasMarked(task) {
+      var el = document.querySelector(`.task-${task.id}`)
+      window.console.log('taskWasMarked:', el, task)
+
+      if (el.classList.contains('completed-task') && !this.completed) {
+        this.completedTime = null
+        el.classList.remove('completed-task')
+        return
+      }
+
+      if (task.completed) {
+        this.completedTime = new Date().toLocaleString()
+        el.classList.add('completed-task')
+      } 
+    },
     async fetchAllTasks() {
       try {
         let response = await TasksService.getAllTasks();
@@ -103,4 +120,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+  .completed-task .title,
+  .completed-task .content {
+    text-decoration: line-through;
+  }
+</style>
