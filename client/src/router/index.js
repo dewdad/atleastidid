@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '@/store'
-import Home from '@/components/Home.vue'
-import Login from '@/components/Login.vue'
-import Register from '@/components/Register.vue'
-import CreateTask from '@/components/CreateTask.vue'
+import Home from '@/views/Home.vue'
+import Login from '@/views/Login.vue'
+import Register from '@/views/Register.vue'
+import ListTasks from '@/views/ListTasks.vue'
+import CreateTask from '@/views/CreateTask.vue'
 
 Vue.use(VueRouter)
 
@@ -31,6 +32,15 @@ const routes = [
     path: '/add-task',
     name: 'create-task',
     component: CreateTask,
+    beforeEnter: (to, from, next) => {
+      if (store.state.auth.userLoggedIn) next()
+      else next('/login') 
+    }
+  },
+  {
+    path: '/tasks',
+    name: 'list-tasks',
+    component: ListTasks,
     beforeEnter: (to, from, next) => {
       if (store.state.auth.userLoggedIn) next()
       else next('/login') 

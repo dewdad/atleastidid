@@ -85,7 +85,11 @@ export default {
   },
   methods: {
     async login() {
-      this.$store.dispatch("auth/login", { ...this.$data });
+      this.$store.dispatch("auth/login", { ...this.$data }).then(
+        () => {
+          this.$router.push({ name: 'list-tasks' })
+        }
+      );
     }
   },
   computed: {

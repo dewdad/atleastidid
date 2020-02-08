@@ -1,18 +1,25 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container-fluid">
+    <div v-if="!$helpers.loggedIn()" class="row">
+      <banner :path="$route.path" />
+    </div>
+    <div class="row">
+      <div v-show="$helpers.loggedIn()" class="col thoughts">
+        <task-list />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Banner from '@/components/Banner'
+import TaskList from '@/components/TaskList'
 
 export default {
   name: 'home',
   components: {
-    HelloWorld
+    'banner': Banner,
+    'task-list': TaskList
   }
 }
 </script>

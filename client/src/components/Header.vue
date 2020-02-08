@@ -51,7 +51,8 @@ export default {
   name: "navigation",
   methods: {
     logout () {
-      this.$store.dispatch('auth/logout').then(() => {
+      this.$store.dispatch('auth/logout')
+      .then(() => {
         if (!this.$store.state.auth.userLoggedIn) {
           this.$router.push({ name: 'home' })
         }

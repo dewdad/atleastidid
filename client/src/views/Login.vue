@@ -58,7 +58,7 @@ export default {
           window.console.log(response.data)
           this.$store
             .dispatch('auth/setAuthToken', response.data.token)
-            .then(() => this.$router.push({ name: 'home' }))
+            .then(() => this.$router.push({ name: 'list-tasks' }))
         }
       } catch(err) {
         this.error = err

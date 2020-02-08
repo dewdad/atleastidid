@@ -37,8 +37,12 @@ export default {
     async login({ state, commit }, credentials) {
       state.error = null
       commit('resetUserToken')
+      commit('notices/clearNotices', null, { root: true })
       await AuthServices.login(credentials).then(response => {
         if (response.status === 200) {
+          commit('notices/addNotice', {
+            message: `Welcome, ${response.data.user.email}!`
+          }, { root: true })
           commit('setUserToken', response.data.token)
         }
       }).catch(errorResponse => {
@@ -52,6 +56,7 @@ export default {
     },
     logout({ commit }) {
       commit('resetUserToken')
+      commit('notices/clearNotices', null, { root: true })
     },
     async checkUserState({ commit, state }) {
       window.console.log(state.token)
