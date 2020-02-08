@@ -6,6 +6,8 @@ router.get('/tasks', AuthController.authRequired, TasksController.index)
 
 router.post('/tasks', AuthController.authRequired, TasksController.create)
 
+router.post('/tasks/:id/complete', AuthController.authRequired, TasksController.complete)
+
 router.delete('/tasks/:id', AuthController.authRequired, TasksController.delete)
 
 module.exports = router

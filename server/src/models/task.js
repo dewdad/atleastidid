@@ -24,6 +24,10 @@ module.exports = (sequelizeInstance) => {
     body: {
       type: Sequelize.STRING
     },
+    completed: {
+      type: Sequelize.BOOLEAN,
+      default: false
+    },
     author: {
       type: Sequelize.STRING
     },

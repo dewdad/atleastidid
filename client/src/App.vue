@@ -13,7 +13,7 @@ export default {
   name: 'app',
   data () {
     return {
-      notices: []
+      notices: this.$store.state.notices.notices || []
     }
   },
   components: {
@@ -21,10 +21,10 @@ export default {
     Navigation
   },
   watch: {
-    $route(to, from ) {
+    notices(val) {
       // ...
-      let notices = this.$store.state.notices.notices
-      window.console.log(to, from, notices)
+      let notices = val
+      window.console.log(val)
       if (notices) {
         this.notices = notices
       }

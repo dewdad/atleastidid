@@ -8,7 +8,8 @@
           <li
             v-for="task in tasks" 
             :key="task.id" 
-            class="list-group-item">
+            class="list-group-item"
+            :data-id="task.id">
             <div class="row position-relative">
               <div class="col">
                 <div class="title">
@@ -25,6 +26,7 @@
                   class="btn btn-danger position-absolute"
                   style="right: 0; top: 0;"
                   @click.prevent="deleteTask(task.id)">Delete</a>
+                  <TaskCheckbox :task="task" />
               </div>
             </div>
           </li>
@@ -46,6 +48,7 @@
 </template>
 
 <script>
+import TaskCheckbox from "@/components/TaskCheckbox";
 import TasksService from "@/services/tasks";
 export default {
   name: "tasks-list",
@@ -53,6 +56,9 @@ export default {
     return {
       tasks: []
     };
+  },
+  components: {
+    TaskCheckbox
   },
   computed: {
     hasTasks() {

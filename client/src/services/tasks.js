@@ -1,6 +1,12 @@
 import Api from './api'
 
 export default {
+  async toggleCompleted(id, value) {
+    const headers = {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    }
+    return Api().post(`/tasks/${id}/complete`, { complete: value }, { headers })
+  },
   async createTask(task) {
     const headers = {
       'Authorization': `Bearer ${localStorage.getItem('token')}`

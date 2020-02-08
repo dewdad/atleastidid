@@ -18,6 +18,40 @@ function slugify(string) {
 }
 
 module.exports = {
+  async complete(req, res) {
+    try {
+      const task = await Task.findOne({
+        where: { id: req.params.id }
+      })
+      if (task) {
+        task.update(
+          { completed: req.body.complete },
+          { where: { id: req.params.id } } 
+        )
+        console.log(req.body)
+        let completed
+        if (req.body.complete) {
+          completed = true
+        } else {
+          completed = false
+        }
+        res.status(200).send({
+          message: `Task ${req.params.id} was marked ${completed}.`,
+          status: 200
+        })
+      } else {
+        res.status(404).send({
+          message: 'Error finding task by id.',
+          status: 404
+        })
+      }
+    } catch (err) {
+      res.status(500).send({
+        message: 'Error posting completion status to task:' + req.params.id,
+        status: 500
+      })
+    }
+  },
   async create(req, res) {
     try {
       const user = await User.findOne({
