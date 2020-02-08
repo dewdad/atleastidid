@@ -23,7 +23,7 @@ module.exports = {
       const user = await User.findOne({
         where: { id: req.payload.id }
       })
-      console.log(user, req.payload)
+      // console.log(user, req.payload)
       if (user) {
         var userId = user.id
         let task = await Task.create({
@@ -65,14 +65,14 @@ module.exports = {
   },
   async delete(req, res) {
     try {
-      console.log('Delete: ', req.params)
+      // console.log('Delete: ', req.params)
       let task = await Task.destroy({
         where: { 
           id: req.params.id
         }
       })
       
-      console.log('Task:', task)
+      // console.log('Task:', task)
       return res.status(200).send({
         message: 'Deleted task: ' + req.params.id
       })

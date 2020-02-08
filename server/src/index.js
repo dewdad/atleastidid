@@ -8,12 +8,18 @@ const app = express()
 const models = require('./models')
 const PORT = process.env.PORT || 4000
 
-const environment = process.env.NODE_ENV || null
+const environment = process.env.NODE_ENV || 'development'
 
+console.log('\n\nenvironment [/server/src/index.js](ln: 13)', {
+  environment
+}, '\n\n')
 
 if (environment === 'development') {
+  console.log(
+    '\n\nSetting middlewares: errorhandler and morgan [/server/src/index.js](ln: 18)\n\n'
+  )
   app.use(errorhandler())
-  app.use(morgan('combined'))
+  app.use(morgan('common'))
 }
 
 app.use(cors())
@@ -28,6 +34,10 @@ app.use(require('./routes'))
 app.use((req, res, next) => {
   let err = new Error('404 Not Found.')
   err.status = 404
+  console.log('Error Handler Middleware [/server/src/index.js](ln: 31)', {
+    err,
+    errStatus: err.status
+  })
   next(err)
 })
 
@@ -45,6 +55,6 @@ if (environment !== 'production') {
 
 models.sequelizeInstance.sync().then(() => {
   app.listen(PORT, () => {
-    console.log('thoughtsub web server listenting on port:', PORT)
+    console.log('app web server listenting on port:', PORT)
   })
 })

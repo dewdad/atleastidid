@@ -19,7 +19,7 @@ module.exports = {
       const user = await User.create(req.body)
       res.status(200).send({ user })
     } catch (err) {
-      console.log(err, '\n\n\n')
+      // console.log(err, '\n\n\n')
       res.status(400).send({
         error: err,
         message: 'This email account is already in use.'
@@ -33,13 +33,17 @@ module.exports = {
         where: { email: email }
       })
       const isPasswordOk = await user.comparePassword(password)
-      const loginErr = {
-        message: 'Invalid password or username.'
-      }
+      let loginErr = {}
       if (!user) {
+        loginErr.status = 404
+        loginErr.message = 'User not found.'
         return res.status(404).send(loginErr)
       }
       if (!isPasswordOk) {
+        loginErr = {
+          message: 'Invalid password or username.',
+          status: 401
+        }
         return res.status(401).send(loginErr)
       }
       res.status(200).send({
@@ -55,13 +59,14 @@ module.exports = {
     } catch(err) {
       console.log(err)
       res.status(401).send({
-        error: 'User is unauthorized.'
+        message: 'User is unauthorized.',
+        status: 401
       })
     }
   },
   authRequired (req, res, next) {
     let auth = req.headers.authorization || req.headers.Authorization
-    console.log('authRequired:', req.headers)
+    // console.log('authRequired:', req.headers)
     if (auth) {
       const token = req.headers.authorization.split(' ')[1]
       jwt.verify(token, config.auth.secret, function(err, decoded) {

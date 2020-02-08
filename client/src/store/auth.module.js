@@ -1,3 +1,4 @@
+import AuthServices from '@/services/auth'
 import UserServices from '@/services/user'
 
 const token = localStorage.getItem('token')
@@ -6,6 +7,7 @@ window.console.log('token:', token === 'undefined')
 export default {
   namespaced: true,
   state: {
+    error: null,
     token: (token !== 'undefined') ? token : null,
     userLoggedIn: (token) ? true : false
   },
@@ -18,6 +20,9 @@ export default {
       localStorage.setItem('token', token)
       state.userLoggedIn = true
     },
+    setLoginError(state, error) {
+      state.error = error
+    },
     resetUserToken(state) {
       state.token = null
       localStorage.clear()
@@ -28,6 +33,22 @@ export default {
     setAuthToken({ commit }, token) {
       window.console.log('Token (in action):', token)
       commit('setUserToken', token)
+    },
+    async login({ state, commit }, credentials) {
+      state.error = null
+      commit('resetUserToken')
+      await AuthServices.login(credentials).then(response => {
+        if (response.status === 200) {
+          commit('setUserToken', response.data.token)
+        }
+      }).catch(errorResponse => {
+        window.console.log('login err:', errorResponse)
+        const error = {
+          status: errorResponse.response.data.status,
+          message: errorResponse.response.data.message
+        }
+        commit('setLoginError', error)
+      })
     },
     logout({ commit }) {
       commit('resetUserToken')
