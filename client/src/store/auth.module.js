@@ -54,9 +54,15 @@ export default {
         commit('setLoginError', error)
       })
     },
-    logout({ commit }) {
-      commit('resetUserToken')
-      commit('notices/clearNotices', null, { root: true })
+    async logout({ commit }) {
+      await AuthServices.logout().then(response => {
+        if (response.status === 200) {
+          commit('resetUserToken')
+          commit('notices/clearNotices', null, { root: true })
+        }
+      }).catch(err => {
+        window.console.log('auth/logout', err)
+      })
     },
     async checkUserState({ commit, state }) {
       window.console.log(state.token)

@@ -31,7 +31,7 @@ app.use(session({
   cookie: {
     secure: false,
     sameSite: true,
-    maxAge: 10 * 1000
+    maxAge: 1 * 60 * 60 * 1000
   }
 }))
 app.use(bodyParser.json())

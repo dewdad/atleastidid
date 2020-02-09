@@ -46,11 +46,15 @@ module.exports = {
         }
         return res.status(401).send(loginErr)
       } else {
-        req.session.userId = user.id
+        req.session.user = {
+          id: user.id,
+          email: user.email,
+          createdAt: user.createdAt
+        }
         console.log('\n\n\n', req.session.userId, '\n\n\n\n')
-        req.session.save(err => {
-          if (err) console.log('session save err:', err)
-        })
+        // req.session.save(err => {
+        //   if (err) console.log('session save err:', err)
+        // })
         // res.cookie('atleastidid.com', req.session)
       }
       res.status(200).send({

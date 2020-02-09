@@ -5,6 +5,9 @@ export default {
     return Api().post('register', credentials)
   },
   login (credentials) {
-    return Api().post('login', credentials, { withCredentials: true })
+    return Api().post('login', credentials)
+  },
+  logout () {
+    return Api().post('logout')
   }
 }
