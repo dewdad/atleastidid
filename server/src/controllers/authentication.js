@@ -45,6 +45,13 @@ module.exports = {
           status: 401
         }
         return res.status(401).send(loginErr)
+      } else {
+        req.session.userId = user.id
+        console.log('\n\n\n', req.session.userId, '\n\n\n\n')
+        req.session.save(err => {
+          if (err) console.log('session save err:', err)
+        })
+        // res.cookie('atleastidid.com', req.session)
       }
       res.status(200).send({
         user: {

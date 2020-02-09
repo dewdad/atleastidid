@@ -1,5 +1,5 @@
 <template>
-  <form class="home-hero-signup" autocomplete="off" accept-charset="UTF-8" method="post">
+  <form class="home-hero-signup" accept-charset="UTF-8" method="post">
     <fieldset class="form-group">
       <dl class="form-group errored">
         <dt class="input-label">
@@ -12,7 +12,6 @@
             name="email"
             id="user[email]"
             class="form-control form-control input-block"
-            autocomplete="off"
             spellcheck="false"
           />
         </dd>

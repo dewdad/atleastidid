@@ -58,6 +58,10 @@ export default {
   },
   components: {
     "banner": Banner
-  }
+  },
+  // async created () {
+  //   let response = await TasksServices.getAddTaskView()
+  //   window.console.log(response)
+  // }
 };
 </script>

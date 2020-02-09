@@ -57,7 +57,7 @@ module.exports = {
       const user = await User.findOne({
         where: { id: req.payload.id }
       })
-      // console.log(user, req.payload)
+      console.log('Created task:', req.session.userId)
       if (user) {
         var userId = user.id
         let task = await Task.create({
@@ -69,6 +69,7 @@ module.exports = {
           UserId: userId
         })
         res.status(200).send({ task })
+        console.log(req.session)
       } else {
         res.status(404).send({
           message: `User was not found.`

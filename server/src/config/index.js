@@ -4,6 +4,9 @@ if (process.env.NODE_ENV === 'development') {
 }
 module.exports = {
   port: process.env.PORT || 4000,
+  session: {
+    secret: 'session-secreto'
+  },
   db: {
     name: process.env.DB_NAME || 'thoughtsub_db',
     user: process.env.DB_USER || 'root',

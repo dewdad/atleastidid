@@ -1,43 +1,43 @@
 <template>
-  <div id="nav-component" class="position-relative bg-dark py-2">
-    <header class="f4 py-2 position-relative">
+  <div id="nav-component" class="position-relative nav">
+    <header class="py-3 position-relative w-100 border-bottom">
       <div class="container-fluid d-lg-flex flex-items-center">
         <div id="branding" class="position-relative d-lg-flex align-items-center">
           <router-link to="/">
             <h5 class="branding m-0">Atleast I Did...</h5>
           </router-link>
         </div>
-        <nav id="nav" class="col d-lg-flex flex-row-reverse">
+        <nav id="nav" class="col d-lg-flex flex-row-reverse text-white">
           <span class="mx-2">
             <router-link
               to="/"
               class="btn btn-primary">Home</router-link>
           </span>
           <span 
-            v-show="!$helpers.loggedIn()"
+            v-if="!$helpers.loggedIn()"
             class="mx-2">
             <router-link
               to="/login"
               class="btn btn-success">Login</router-link>
           </span>
           <span 
-            v-show="!$helpers.loggedIn()"
+            v-if="!$helpers.loggedIn()"
             class="mx-2">
             <router-link
               to="/register"
               class="btn btn-primary">Register</router-link>
           </span>
           <span 
-            v-show="$helpers.loggedIn()"
+            v-if="$helpers.loggedIn()"
             class="mx-2">
             <router-link
               to="/add-task"
               class="btn btn-success">Add a Task</router-link>
           </span>
           <span
-            v-show="$helpers.loggedIn()" 
+            v-if="$helpers.loggedIn()" 
             class="mx-2">
-            <a @click="logout" class="btn btn-danger">Logout</a>
+            <a @click.prevent="logout" class="btn btn-danger">Logout</a>
           </span>
         </nav>
 

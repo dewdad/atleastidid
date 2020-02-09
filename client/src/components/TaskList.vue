@@ -20,8 +20,10 @@
                 </div>
               </div>
               <div class="col">
-                <p><b>Created:</b> {{ createdAtFormat(task.createdAt) }}</p>
                 <p v-if="completedTime"><b>Completed:</b> {{ completedTime.split(',')[0] +  " | " + completedTime.split(',')[1] }}</p>
+                <p><b>Created:</b> {{ createdAtFormat(task.createdAt) }}</p>
+              </div>
+              <div class="col">
                 <a
                   href="#"
                   class="btn btn-danger position-absolute"
@@ -64,7 +66,8 @@ export default {
   },
   computed: {
     hasTasks() {
-      if (this.tasks.length > 0) return true
+      window.console.log('hasTasks', this.tasks)
+      if (this.tasks && this.tasks.length) return true
       return false
     }
   },
@@ -101,7 +104,7 @@ export default {
         let response = await TasksService.deleteTask(id);
         if (response.status === 200) {
           window.console.log('Task deleted...')
-          this.tasks = await this.fetchAllTasks();
+          await this.fetchAllTasks()
         }
       } catch (err) {
         window.console.error(err);

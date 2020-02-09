@@ -9,15 +9,15 @@ const sequelize = new Sequelize(
 )
   
 const models = {} 
-models.sequelizeInstance = sequelize
-const User = models.User = require('./user')(sequelize)
-const Task = models.Task = require('./task')(sequelize)
-
+models.User = require('./user')(sequelize)
+models.Task = require('./task')(sequelize)
 Object.keys(models).forEach(function (modelName) {
+  console.log(modelName)
   if ('associate' in models[modelName]) {
     // console.log('associate!!', models[modelName])
     models[modelName].associate(models)
   }
 })
 
+models.sequelizeInstance = sequelize
 module.exports = models
