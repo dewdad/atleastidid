@@ -1,7 +1,7 @@
 <template>
   <div id="task-list-component" class="container-fluid py-5">
     <span>All of your <b>Latest Tasks</b></span>
-    <div class="row flex">
+    <div v-if="hasTasks" class="row flex">
       <template v-if="hasTasks">
       <div class="col-12">
         <ul class="list-group">
@@ -46,6 +46,12 @@
           >Create a Task</a>
         </div>
       </template>
+    </div>
+    <div v-else class="row text-center">
+      <div class="py-5 w-100 position-relative">
+        <div class="spinner-border text-primary position-absolute" role="status"></div>
+        <span>Loading all your tasks. Please hang tight...</span>
+      </div>
     </div>
   </div>
 </template>
@@ -127,5 +133,9 @@ export default {
   .completed-task .title,
   .completed-task .content {
     text-decoration: line-through;
+  }
+  .spinner-border.text-primary.position-absolute {
+    left: calc(50% - 20px);
+    top: 0px;
   }
 </style>
