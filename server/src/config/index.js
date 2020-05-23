@@ -1,5 +1,5 @@
 const dotenv = require('dotenv')
-dotenv.config()
+dotenv.config({ path: '../.env' })
 
 module.exports = {
   port: process.env.PORT,
@@ -18,4 +18,4 @@ module.exports = {
   auth: {
     secret: process.env.SECRET
   }
-}
+} 
