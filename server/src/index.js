@@ -41,7 +41,7 @@ console.log(
 )
 app.use(errorhandler())
 app.use(morgan('common'))
-app.use(cors({ credentials: true, origin: 'http://localhost:8080' }))
+app.use(cors({ credentials: true, origin: 'http://192.211.96.108:8080' }))
 app.use(express.static(__dirname + '/public'))
 
 // Routes
