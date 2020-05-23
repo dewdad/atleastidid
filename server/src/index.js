@@ -3,7 +3,7 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const errorhandler = require('errorhandler')
-const PORT = process.env.PORT || 4000
+const PORT = require('./config').port
 
 const session = require('express-session')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)

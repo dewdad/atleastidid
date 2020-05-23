@@ -2,21 +2,22 @@ const dotenv = require('dotenv')
 if (process.env.NODE_ENV === 'development') {
   dotenv.config()
 }
+
 module.exports = {
-  port: process.env.PORT || 4000,
+  port: process.env.PORT,
   session: {
-    secret: 'session-secreto'
+    secret: process.env.SESSION_SECRET
   },
   db: {
-    name: process.env.DB_NAME || 'thoughtsub_db',
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || '',
+    name: process.env.DB_NAME,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
     options: {
-      dialect: process.env.DB_DIALECT || 'mysql',
-      host: process.env.DB_HOST || 'localhost'
+      dialect: 'mysql',
+      host: process.env.DB_HOST
     },
   },
   auth: {
-    secret: process.env.SECRET || 'secreto'
+    secret: process.env.SECRET
   }
 }
