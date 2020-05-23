@@ -1,7 +1,5 @@
 const dotenv = require('dotenv')
-if (process.env.NODE_ENV === 'development') {
-  dotenv.config()
-}
+dotenv.config()
 
 module.exports = {
   port: process.env.PORT,
