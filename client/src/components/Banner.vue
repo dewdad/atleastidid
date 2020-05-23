@@ -2,7 +2,7 @@
   <!-- <div class="banner">
     <ts-breadcrumb :path="$route.path" />
   </div>-->
-  <div class="py-6 py-sm-8">
+  <div class="col-md-12 py-6 py-sm-8">
     <div class="container-lg p-responsive position-relative">
       <div class="jumbo-registration-wrapper d-md-flex flex-items-center align-items-center">
         <!-- Jumbotron -->
@@ -15,7 +15,7 @@
         </jumbotron>
         <!-- ./Jumbotron -->
         <!-- Register Form -->
-        <div class="mx-auto col-sm-8 col-md-6 hide-sm">
+        <div class="mx-auto hide-sm">
           <div class="rounded-bottom text-white bg-dark py-4 px-4 px-md-3 px-lg-4">
             <login-form v-if="!$helpers.loggedIn()" />
           </div>
