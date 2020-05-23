@@ -51,7 +51,7 @@ app.use(require('./routes'))
 
 // catch 404, forward to error handler
 app.use((req, res, next) => {
-  console.log(req.origin)
+  console.log(req.protocol + '://' + req.get('host') + req.originalUrl)
   let err = new Error('404 Not Found.')
   err.status = 404
   console.log('Error Handler Middleware [/server/src/index.js](ln: 31)', {
