@@ -39,7 +39,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(errorhandler())
 app.use(morgan('common'))
 app.use(cors({
-  "origin": "http://198.211.96.108:80",
+  "origin": "http://198.211.96.108:4000/",
   "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
   "preflightContinue": false,
   "optionsSuccessStatus": 204
@@ -49,9 +49,12 @@ app.use(express.static(__dirname + '/public'))
 // Routes
 app.use(require('./routes'))
 
+app.use((req, res, next) => {
+  console.log('Request inbound from:', req.protocol + '://' + req.get('host') + req.originalUrl)
+})
+
 // catch 404, forward to error handler
 app.use((req, res, next) => {
-  console.log(req.protocol + '://' + req.get('host') + req.originalUrl)
   let err = new Error('404 Not Found.')
   err.status = 404
   console.log('Error Handler Middleware [/server/src/index.js](ln: 31)', {
