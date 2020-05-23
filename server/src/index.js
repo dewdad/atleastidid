@@ -38,7 +38,12 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(errorhandler())
 app.use(morgan('common'))
-app.use(cors())
+app.use(cors({
+  "origin": "*",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "preflightContinue": false,
+  "optionsSuccessStatus": 204
+}))
 app.use(express.static(__dirname + '/public'))
 
 // Routes
