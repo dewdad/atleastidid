@@ -8,11 +8,14 @@ router.post('/login', AuthController.login)
 router.post('/logout', (req, res) => {
   if (req.session.user) {
     let id = req.session.userId
+    res.clearCookie('connect.sid', {
+      path: '/'
+    });
     req.session.destroy((err) => {
       if (err) console.error(err)
-    })
-    res.status(200).send({
-      message: 'Successfully destroyed user ' + id + ' session'
+      res.status(200).send({
+        message: 'Successfully destroyed user ' + id + ' session'
+      }).redirect('/')
     })
   } else {
     res.status(500).send({
