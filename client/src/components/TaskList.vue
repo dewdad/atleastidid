@@ -1,7 +1,7 @@
 <template>
   <div id="task-list-component" class="container-fluid py-5">
     <span>All of your <b>Latest Tasks</b></span>
-    <div v-if="hasTasks" class="row flex">
+    <div v-if="hasTasks && !loading" class="row flex">
       <template v-if="hasTasks">
       <div class="col-12">
         <ul class="list-group">
@@ -47,7 +47,13 @@
         </div>
       </template>
     </div>
-    <div v-else class="row text-center">
+    <div v-else>
+      <div class="alert alert-danger mt-1">
+        You haven't created a task yet :(
+      </div>
+      <router-link tag="a" to="/add-task">Click here</router-link> to create your first task!
+    </div>
+    <div v-if="loading" class="row text-center">
       <div class="py-5 w-100 position-relative">
         <div class="spinner-border text-primary position-absolute" role="status"></div>
         <span>Loading all your tasks. Please hang tight...</span>
@@ -63,6 +69,7 @@ export default {
   name: "tasks-list",
   data() {
     return {
+      loading: true,
       completedTime: null,
       tasks: []
     };
@@ -98,7 +105,8 @@ export default {
         let response = await TasksService.getAllTasks();
         if (response.status === 200) {
           window.console.log('Loading tasks:', response.data.tasks)
-          this.tasks = response.data.tasks;
+          this.tasks = response.data.tasks
+          this.loading = false
         }
       } catch (err) {
         window.console.error(err);
