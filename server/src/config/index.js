@@ -1,5 +1,10 @@
 const dotenv = require('dotenv')
-dotenv.config({ path: '../.env' })
+
+if (process.env.NODE_ENV == 'production') {
+  dotenv.config({ path: '../.env' })
+} else {
+  dotenv.config()
+}
 
 module.exports = {
   port: process.env.PORT,
