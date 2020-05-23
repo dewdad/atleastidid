@@ -38,7 +38,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(errorhandler())
 app.use(morgan('common'))
-app.use(cors({ credentials: true, origin: 'http://localhost:8080/' }))
+app.use(cors())
 app.use(express.static(__dirname + '/public'))
 
 // Routes
