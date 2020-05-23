@@ -51,6 +51,7 @@ app.use(require('./routes'))
 
 app.use((req, res, next) => {
   console.log('Request inbound from:', req.protocol + '://' + req.get('host') + req.originalUrl)
+  next()
 })
 
 // catch 404, forward to error handler
