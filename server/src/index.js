@@ -39,7 +39,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(errorhandler())
 app.use(morgan('common'))
 app.use(cors({
-  "origin": "http://198.211.96.108:4000/",
+  "origin": "*",
   "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
   "preflightContinue": false,
   "optionsSuccessStatus": 204
