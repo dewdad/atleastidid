@@ -1,9 +1,11 @@
 import axios from 'axios'
-var axiosInstance = axios.create({
+let axiosOptions = {
   baseURL: process.env.VUE_APP_API_BASE,
-  withCredentials: true
-})
-//axiosInstance.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
+}
+if (process.env.NODE_ENV === 'production') {
+  axiosOptions.withCredentials = true
+}
+var axiosInstance = axios.create(axiosOptions)
 export default function () {
   return axiosInstance
 }
