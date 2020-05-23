@@ -40,9 +40,10 @@ app.use(errorhandler())
 app.use(morgan('common'))
 if (environment == 'production') {
   var corsOptions = {
-    origin: "*",
+    origin: true,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
+    credentials: true,
     optionsSuccessStatus: 204
   }
 } else {
