@@ -38,12 +38,20 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(errorhandler())
 app.use(morgan('common'))
-app.use(cors({
-  "origin": "*",
-  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-  "preflightContinue": false,
-  "optionsSuccessStatus": 204
-}))
+if (environment == 'production') {
+  var corsOptions = {
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    optionsSuccessStatus: 204
+  }
+} else {
+  var corsOptions = {
+    origin: true,
+    credentials: true
+  }
+}
+app.use(cors(corsOptions))
 app.use(express.static(__dirname + '/public'))
 
 // Routes
