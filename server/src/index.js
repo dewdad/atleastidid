@@ -51,6 +51,8 @@ app.use(require('./routes'))
 
 app.use((req, res, next) => {
   console.log('Request inbound from:', req.protocol + '://' + req.get('host') + req.originalUrl)
+  console.log('Request headers:', req.headers)
+  console.log('Response headers: ', res.headers)
   next()
 })
 
