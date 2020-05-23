@@ -19,9 +19,9 @@ const sessionStore = new SequelizeStore({
 
 const environment = process.env.NODE_ENV || 'development'
 
-console.log('\n\nenvironment [/server/src/index.js](ln: 13)', {
+console.log('\n\nenvironment [/server/src/index.js](ln: 13):', {
   environment
-}, '\n\n')
+})
 
 app.use(session({
   secret: sessionSecret,
@@ -36,12 +36,9 @@ app.use(session({
 }))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-console.log(
-  '\n\nSetting middlewares: errorhandler and morgan [/server/src/index.js](ln: 18)\n\n'
-)
 app.use(errorhandler())
 app.use(morgan('common'))
-app.use(cors({ credentials: true, origin: 'http://192.211.96.108:8080' }))
+app.use(cors({ credentials: true, origin: 'http://localhost:8080/' }))
 app.use(express.static(__dirname + '/public'))
 
 // Routes
