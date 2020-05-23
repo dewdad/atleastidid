@@ -55,6 +55,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach(function (to, from, next) {
+  window.console.log('userLoggedIn:', store.state.auth.userLoggedIn)
   if (store.state.auth.userLoggedIn) {
     store.dispatch('auth/checkUserState').then(next)
   } else {
