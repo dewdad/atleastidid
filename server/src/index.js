@@ -58,21 +58,11 @@ app.use(express.static(__dirname + '/public'))
 // Routes
 app.use(require('./routes'))
 
-app.use((req, res, next) => {
-  console.log('Request inbound from:', req.protocol + '://' + req.get('host') + req.originalUrl)
-  console.log('Request headers:', req.headers)
-  console.log('Response headers: ', res.headers)
-  next()
-})
-
 // catch 404, forward to error handler
 app.use((req, res, next) => {
   let err = new Error('404 Not Found.')
   err.status = 404
-  console.log('Error Handler Middleware [/server/src/index.js](ln: 31)', {
-    err,
-    errStatus: err.status
-  })
+  console.error(`${err.status}: ${err.message}`)
   next(err)
 })
 

@@ -79,7 +79,6 @@ export default {
   },
   computed: {
     hasTasks() {
-      window.console.log('hasTasks', this.tasks)
       if (this.tasks && this.tasks.length) return true
       return false
     }
@@ -87,8 +86,6 @@ export default {
   methods: {
     taskWasMarked(task) {
       var el = document.querySelector(`.task-${task.id}`)
-      window.console.log('taskWasMarked:', el, task)
-
       if (el.classList.contains('completed-task') && !this.completed) {
         this.completedTime = null
         el.classList.remove('completed-task')
@@ -104,7 +101,6 @@ export default {
       try {
         let response = await TasksService.getAllTasks();
         if (response.status === 200) {
-          window.console.log('Loading tasks:', response.data.tasks)
           this.tasks = response.data.tasks
           this.loading = false
         }
@@ -114,10 +110,8 @@ export default {
     },
     async deleteTask(id) {
       try {
-        window.console.log("Deleting task: " + id + "...");
         let response = await TasksService.deleteTask(id);
         if (response.status === 200) {
-          window.console.log('Task deleted...')
           await this.fetchAllTasks()
         }
       } catch (err) {

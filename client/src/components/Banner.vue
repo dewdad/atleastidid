@@ -1,7 +1,4 @@
 <template>
-  <!-- <div class="banner">
-    <ts-breadcrumb :path="$route.path" />
-  </div>-->
   <div class="col-md-12 py-6 py-sm-8">
     <div class="container-lg p-responsive position-relative">
       <div class="jumbo-registration-wrapper d-md-flex flex-items-center align-items-center">

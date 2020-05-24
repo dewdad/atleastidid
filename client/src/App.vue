@@ -24,7 +24,6 @@ export default {
     notices(val) {
       // ...
       let notices = val
-      window.console.log(val)
       if (notices) {
         this.notices = notices
       }

@@ -52,16 +52,12 @@ export default {
           if (response.status === 200) this.$router.push({ name: 'home' })
         })    
       } catch(err) {
-        window.console.log(err)
+        window.console.error(err)
       }
     }
   },
   components: {
     "banner": Banner
-  },
-  // async created () {
-  //   let response = await TasksServices.getAddTaskView()
-  //   window.console.log(response)
-  // }
+  }
 };
 </script>

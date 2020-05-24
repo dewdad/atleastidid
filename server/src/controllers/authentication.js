@@ -51,11 +51,10 @@ module.exports = {
           email: user.email,
           createdAt: user.createdAt
         }
-        console.log('\n\n\n', req.session.userId, '\n\n\n\n')
-        // req.session.save(err => {
-        //   if (err) console.log('session save err:', err)
-        // })
-        // res.cookie('atleastidid.com', req.session)
+        console.log('res.session.user assigned value =>', req.session.user, '\n\n')
+        req.session.save(err => {
+          if (err) console.log('session save err:', err)
+        })
       }
       res.status(200).send({
         user: {
@@ -93,5 +92,26 @@ module.exports = {
       })
     } 
     next()
+  },
+  logout (req, res) {
+    if (req.session.user) {
+      res.clearCookie('connect.sid', { path: '/' });
+      let sessionCopy = Object.assign({}, req.session) 
+      req.session.destroy((err) => {
+        if (err) {
+          console.error(err)
+        }
+        else {
+          console.log(`Successfully deleted session for user <${sessionCopy.user.email}>`)
+          res.status(200).send({
+            message: `Successfully destroyed user <${sessionCopy.user.email}> session`
+          })
+        }
+      })
+    } else {
+      res.status(401).send({
+        message: 'User is not logged in, cannot logout.'
+      })
+    }
   }
 }

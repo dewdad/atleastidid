@@ -45,7 +45,6 @@ export default {
         let creds = { email: this.email, password: this.password }
         const response = await AuthService.register(creds)
         if (response.status === 200) {
-          window.console.log(response.data)
           this.$router.push({ name: 'login' })
         }
       } catch(err) {

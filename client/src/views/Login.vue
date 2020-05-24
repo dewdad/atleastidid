@@ -55,7 +55,6 @@ export default {
         let creds = { email: this.email, password: this.password }
         const response = await AuthService.login(creds)
         if (response.status === 200) {
-          window.console.log(response.data)
           this.$store
             .dispatch('auth/setAuthToken', response.data.token)
             .then(() => this.$router.push({ name: 'list-tasks' }))
