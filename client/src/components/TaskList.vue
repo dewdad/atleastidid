@@ -85,16 +85,18 @@ export default {
   },
   methods: {
     taskWasMarked(task) {
-      var el = document.querySelector(`.task-${task.id}`)
+      var el 
+      if (task.id) el = document.querySelector(`.task-${task.id}`)
+      window.console.log(el)
       if (el.classList.contains('completed-task') && !this.completed) {
         this.completedTime = null
         el.classList.remove('completed-task')
         return
       }
 
-      if (task.completed) {
+      if (task.completed && task.id) {
         this.completedTime = new Date().toLocaleString()
-        el.classList.add('completed-task')
+        el.className = (`list-group-item task-${task.id} completed-task`)
       } 
     },
     async fetchAllTasks() {
