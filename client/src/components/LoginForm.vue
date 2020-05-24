@@ -58,15 +58,15 @@
       }"
       type="submit"
       @click.prevent="login"
-    >Sign up for GitHub</button>
+    >Sign up</button>
     <p class="form-control-note mb-0 mt-3">
-      By clicking “Sign up for GitHub”, you agree to our
+      By clicking “Sign up”, you agree to our
       <a
-        class
+        class="text-light"
         href="https://help.github.com/terms"
         target="_blank"
       >Terms of Service</a> and
-      <a class href="https://help.github.com/privacy" target="_blank">Privacy Statement</a>.
+      <a class="text-light" href="https://help.github.com/privacy" target="_blank">Privacy Statement</a>.
       <span class="js-email-notice">We’ll occasionally send you account related emails.</span>
     </p>
   </form>

@@ -7,7 +7,7 @@
           <p class="mb-4">
             AtleastIDid is a task management platform inspired by the way you work. From
             <a href="#" class="jumbotron-link">Goal Creation</a> to
-            <a href="#" class="jumbotron-link">Goal Completion</a>, you can track and audit yourself, manage projects, and build your self-discipline alongside 40 million&nbsp;users.
+            <a href="#" class="jumbotron-link">Goal Completion</a>, you can track and audit yourself, manage projects, and build your self-discipline.
           </p>
         </jumbotron>
         <!-- ./Jumbotron -->
@@ -23,7 +23,7 @@
             class="btn-mktg btn-primary-mktg btn-large-mktg"
             data-ga-click="Signup, Attempt, location:home hero mobile"
             href="#"
-          >Sign up for GitHub</a>
+          >Sign up and be Productive!</a>
         </div>
         <!-- ./Register Form -->
       </div>
@@ -34,7 +34,6 @@
 <script>
 import LoginForm from '@/components/LoginForm'
 import Jumbotron from '@/components/Jumbotron'
-// import Breadcrumbs from '@/components/Breadcrumbs'
 export default {
   name: "banner",
   components: {
