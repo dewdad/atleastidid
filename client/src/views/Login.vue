@@ -58,6 +58,7 @@ export default {
           this.$store
             .dispatch('auth/setAuthToken', response.data.token)
             .then(() => this.$router.push({ name: 'list-tasks' }))
+          window.location.reload
         }
       } catch(err) {
         this.error = err
