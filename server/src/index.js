@@ -44,6 +44,7 @@ if (environment == 'production') {
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
     credentials: true,
+    sameSite: true,
     optionsSuccessStatus: 204
   }
 } else {
