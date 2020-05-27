@@ -10,6 +10,7 @@
         <nav id="nav" class="col d-lg-flex flex-row-reverse text-white">
           <span class="mx-2">
             <router-link
+              v-if="$helpers.loggedIn()"
               to="/"
               class="btn btn-primary">Home</router-link>
           </span>
