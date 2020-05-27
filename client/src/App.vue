@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <FlashMessages v-if="notices.length" :notices="notices" />
+    <FlashMessages v-if="notice" :notice="notice" />
     <Navigation />
     <router-view/>
   </div>
@@ -8,26 +8,32 @@
 
 <script>
 import FlashMessages from '@/components/FlashMessages'
+import { mapState } from 'vuex'
 import Navigation from '@/components/Header'
 export default {
   name: 'app',
   data () {
     return {
-      notices: this.$store.state.notices.notices || []
+      notice: null
     }
+  },
+  computed: {
+    ...mapState('notices', { notices: state => state.notices })
   },
   components: {
     FlashMessages,
     Navigation
   },
   watch: {
-    notices(val) {
-      // ...
-      let notices = val
-      if (notices) {
-        this.notices = notices
-      }
+    notices (val) {
+      window.console.log('watching notices!', val)
+      const latest = val.slice(-1)[0]
+      window.console.log('latest notification:', latest)
+      this.notice = latest
     }
+  },
+  created () {
+    window.console.log(this.notices)
   }
 }
 </script>
