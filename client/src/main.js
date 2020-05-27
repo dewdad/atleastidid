@@ -8,11 +8,6 @@ Vue.config.productionTip = false
 
 Vue.prototype.$helpers = helpers
 
-// router.beforeEach((to, from, next) => {
-//   store.dispatch('auth/checkUserState')
-//   next()
-// })
-
 new Vue({
   router,
   store,
