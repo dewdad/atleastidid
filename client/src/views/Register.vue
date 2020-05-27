@@ -1,7 +1,9 @@
 <template>
   <div id="register-form">
     <form class="form-register">
-      <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Sign Up</h1>
+      <h1 class="h3 mb-3 font-weight-normal text-capitalize" style="text-align: center">
+        {{ $helpers.getPathName($route.path) }}
+      </h1>
       <input
         v-model="email"
         type="email"
@@ -22,7 +24,6 @@
       <button @click.prevent="register" class="btn btn-success btn-block" type="submit">
         <i class="fas fa-sign-in-alt"></i> Sign Up
       </button>
-      <hr />
     </form>
   </div>
 </template>
