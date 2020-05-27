@@ -1,4 +1,5 @@
 import store from '@/store'
+import './filters'
 
 var helpers = {
   loggedIn: function () {
