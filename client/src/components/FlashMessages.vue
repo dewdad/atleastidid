@@ -1,6 +1,6 @@
 <template>
   <div id="flash-messages-component" class="alert alert-warning alert-dismissible fade show position-absolute" role="alert">
-    <strong>{{ lastNotice }}</strong>
+    <strong>{{ notice.message }}</strong>
     <button
       type="button"
       class="close"
@@ -16,14 +16,9 @@
 export default {
   name: "flash-messages",
   props: {
-    notices: {
-      type: Array,
+    notice: {
+      type: Object,
       required: true
-    }
-  },
-  computed: {
-    lastNotice () {
-      return this.notices[this.notices.length - 1].message
     }
   }
 };
