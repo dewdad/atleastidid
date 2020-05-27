@@ -30,19 +30,6 @@
             id="user[password]"
             class="form-control form-control input-block"
           />
-          <!-- <p class="form-control-note text-danger alert alert-secondary mt-1">
-            Make sure it's
-            <span data-more-than-n-chars>at least 15 characters</span> OR
-            <span data-min-chars class="text-green">at least 8 characters</span>&nbsp;
-            <span data-number-requirement class="text-green">including a number</span>&nbsp;
-            <span data-letter-requirement class="text-green">and a lowercase letter</span>.
-            <br>
-            <a
-              href="https://help.github.com/articles/creating-a-strong-password"
-              class="btn btn-info d-inline-block"
-              aria-label="Learn more about strong passwords"
-            >Learn more</a>
-          </p>-->
         </dd>
         <dd
           v-if="error"
