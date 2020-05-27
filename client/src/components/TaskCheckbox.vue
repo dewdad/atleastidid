@@ -23,13 +23,17 @@ export default {
   },
   methods: {
     async toggleCompleted(id) {
+      let message = ''
       await TasksService.toggleCompleted(id, this.completed)
         .then(response => {
           if (response.status === 200) {
-            if (this.completed) {
-              this.$store.commit('notices/addNotice', { message: response.data.message })
+            if (response.data.complete === true) {
+              message = `Task ${id} was completed!`
+            } else {
+              message = `Task ${id} is incomplete!`
             }
-            this.$emit('taskMarked')
+            this.$store.commit('notices/addNotice', { message })
+            this.$emit('taskMarked', response.data)
           }
         })
         .catch(err => {
@@ -38,10 +42,8 @@ export default {
     }
   },
   watch: {
-    completed() {
-      // this.$store.commit('notices/clearNotices')
-      if (this.completed !== null || this.completed !== undefined)
-        this.toggleCompleted(this.task.id);
+    completed () {
+      this.toggleCompleted(this.task.id);
     }
   }
 };
