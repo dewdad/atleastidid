@@ -4,7 +4,7 @@
       <div class="container-fluid d-lg-flex flex-items-center">
         <div id="branding" class="position-relative d-lg-flex align-items-center">
           <router-link to="/">
-            <h5 class="branding m-0">Atleast I Did...</h5>
+            <h5 class="branding m-0">atleastidid!</h5>
           </router-link>
         </div>
         <nav id="nav" class="col d-lg-flex flex-row-reverse text-white">
