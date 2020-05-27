@@ -26,9 +26,8 @@ module.exports = {
       if (task) {
         task.update(
           { completed: req.body.complete },
-          { where: { id: req.params.id } } 
+          { where: { id: req.params.id } }
         )
-        console.log(req.body)
         let completed
         if (req.body.complete) {
           completed = true
@@ -36,6 +35,17 @@ module.exports = {
           completed = false
         }
         res.status(200).send({
+          complete: completed,
+          UserId: task.UserId,
+          author: task.author,
+          body: task.body,
+          completed: task.completed,
+          createdAt: task.createdAt,
+          description: task.description,
+          id: task.id,
+          slug: task.slug,
+          title: task.title,
+          updatedAt: task.updatedAt,
           message: `Task ${req.params.id} was marked ${completed}.`,
           status: 200
         })
@@ -62,7 +72,7 @@ module.exports = {
         var userId = user.id
         let task = await Task.create({
           slug: slugify(req.body.title),
-          title: req.body.title,  
+          title: req.body.title,
           description: req.body.description,
           body: req.body.body,
           author: user.email,
@@ -91,7 +101,7 @@ module.exports = {
       return res.status(200).send({
         tasks
       })
-    } catch(err) {
+    } catch (err) {
       res.status(500).send({
         error: err,
         message: 'Error fetching all tasks.'
@@ -102,16 +112,16 @@ module.exports = {
     try {
       // console.log('Delete: ', req.params)
       let task = await Task.destroy({
-        where: { 
+        where: {
           id: req.params.id
         }
       })
-      
+
       // console.log('Task:', task)
       return res.status(200).send({
         message: 'Deleted task: ' + req.params.id
       })
-    } catch(err) {
+    } catch (err) {
       res.status(500).send({
         error: err,
         message: 'Error deleting task: ' + req.params.id
