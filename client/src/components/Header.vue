@@ -2,8 +2,8 @@
   <div id="nav-component" class="position-relative nav">
     <header class="py-3 position-relative w-100 border-bottom">
       <div class="container-fluid d-lg-flex flex-items-center">
-        <div id="branding" class="position-relative d-lg-flex align-items-center">
-          <router-link tag="div" to="/">
+        <div id="branding" class="d-lg-flex align-items-center">
+          <router-link class="position-relative mb-2" tag="div" to="/">
             <h5 class="branding-title m-0">atleastidid</h5>
             <small>.com</small>
           </router-link>

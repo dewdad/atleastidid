@@ -15,15 +15,17 @@
 .branding-title,
 .branding-title + small {
   font-family: 'IBM-Plex-Sans-Bold-Italic';
+  cursor: pointer;
 }
 .branding-title {
   font-size: 32px;
   letter-spacing: 1px;
+  width: 175px;
 }
 
 .branding-title + small {
   position: absolute;
-  right: -44px;
+  left: 165px;
   bottom: -7px;
   font-size: 22px;
   color: crimson;
@@ -43,6 +45,5 @@
 }
 
 #nav-component {
-  box-shadow: -1px -1px 6px;
   z-index: 10;
 }
