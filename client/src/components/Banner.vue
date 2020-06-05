@@ -13,7 +13,7 @@
         <!-- ./Jumbotron -->
         <!-- Register Form -->
         <div class="mx-auto hide-sm">
-          <div class="rounded-bottom text-white bg-dark py-4 px-4 px-md-3 px-lg-4">
+          <div class="rounded-bottom border py-4 px-4 px-md-3 px-lg-4">
             <login-form v-if="!$helpers.loggedIn()" />
           </div>
         </div>

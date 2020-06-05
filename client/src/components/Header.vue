@@ -3,23 +3,25 @@
     <header class="py-3 position-relative w-100 border-bottom">
       <div class="container-fluid d-lg-flex flex-items-center">
         <div id="branding" class="position-relative d-lg-flex align-items-center">
-          <router-link to="/">
-            <h5 class="branding m-0">atleastidid!</h5>
+          <router-link tag="div" to="/">
+            <h5 class="branding-title m-0">atleastidid</h5>
+            <small>.com</small>
           </router-link>
         </div>
         <nav id="nav" class="col d-lg-flex flex-row-reverse text-white">
           <span class="mx-2">
             <router-link
-              v-if="$helpers.loggedIn()"
               to="/"
-              class="btn btn-primary">Home</router-link>
+              class="btn btn-primary">
+              {{ !$helpers.loggedIn() ? 'Home' : 'Dashboard' }}
+            </router-link>
           </span>
           <span 
             v-if="!$helpers.loggedIn()"
             class="mx-2">
             <router-link
               to="/login"
-              class="btn btn-success">Login</router-link>
+              class="btn btn-primary">Login</router-link>
           </span>
           <span 
             v-if="!$helpers.loggedIn()"

@@ -45,16 +45,10 @@
       }"
       type="submit"
       @click.prevent="login"
-    >Sign up</button>
+    >Login</button>
     <p class="form-control-note mb-0 mt-3">
-      By clicking “Sign up”, you agree to our
-      <a
-        class="text-light"
-        href="https://help.github.com/terms"
-        target="_blank"
-      >Terms of Service</a> and
-      <a class="text-light" href="https://help.github.com/privacy" target="_blank">Privacy Statement</a>.
-      <span class="js-email-notice">We’ll occasionally send you account related emails.</span>
+      If you already have an account with us click the "Login" button above to enter your dashboard.
+      If you don't have an account you can create a <i>free</i> account <router-link to="/register">here</router-link>.
     </p>
   </form>
 </template>
@@ -71,11 +65,7 @@ export default {
   },
   methods: {
     async login() {
-      this.$store.dispatch("auth/login", { ...this.$data }).then(
-        () => {
-          this.$router.push({ name: 'list-tasks' })
-        }
-      );
+      this.$store.dispatch("auth/login", { ...this.$data })
     }
   },
   computed: {

@@ -3,9 +3,46 @@
   font-family: 'IBM-Plex-Sans-Bold-Italic';
   src: url('fonts/IBMPlexSans-BoldItalic.ttf');
 }
+@font-face {
+  font-family: 'IBM-Plex-Sans-Regular';
+  src: url('fonts/IBMPlexSans-Regular.ttf')
+}
+@font-face {
+  font-family: 'IBM-Plex-Sans-SemiBold';
+  src: url('fonts/IBMPlexSans-SemiBold.ttf');
+}
 
-.branding {
+.branding-title,
+.branding-title + small {
   font-family: 'IBM-Plex-Sans-Bold-Italic';
+}
+.branding-title {
   font-size: 32px;
   letter-spacing: 1px;
+}
+
+.branding-title + small {
+  position: absolute;
+  right: -44px;
+  bottom: -7px;
+  font-size: 22px;
+  color: crimson;
+}
+
+.btn-primary {
+  border-color: #777;
+  font-family: 'IBM-Plex-Sans-SemiBold';
+  background-color: transparent;
+  color: crimson;
+}
+.btn-primary:hover {
+  border-color: #777;
+  font-family: 'IBM-Plex-Sans-SemiBold';
+  background-color: #000;
+  color: #fff;
+}
+
+#nav-component {
+  box-shadow: -1px -1px 6px;
+  z-index: 10;
 }
