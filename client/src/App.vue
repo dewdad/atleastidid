@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <FlashMessages v-if="notice" :notice="notice" />
+    <FlashMessages :notice="notice" />
     <Navigation />
     <router-view/>
   </div>
@@ -13,9 +13,7 @@ import Navigation from '@/components/Header'
 export default {
   name: 'app',
   data () {
-    return {
-      notice: null
-    }
+    return { notice: null }
   },
   computed: {
     ...mapState('notices', { notices: state => state.notices })
@@ -26,14 +24,15 @@ export default {
   },
   watch: {
     notices (val) {
-      window.console.log('watching notices!', val)
-      const latest = val.slice(-1)[0]
-      window.console.log('latest notification:', latest)
-      this.notice = latest
+      if (val) {
+        const latest = val.slice(-1)[0]
+        window.console.log('latest notification:', latest)
+        this.notice = latest
+      }
     }
   },
   created () {
-    window.console.log(this.notices)
+    window.console.log('state notices:', this.notices)
   }
 }
 </script>
