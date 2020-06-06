@@ -2,27 +2,27 @@
   <div
     v-if="notice"
     id="flash-messages-component"
-    class="alert alert-primary alert-dismissible fade show position-absolute"
+    :class="`alert alert-${notice.type || 'primary'} fade show position-absolute`"
     role="alert">
-    <strong>{{ notice.message }}</strong>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-    <!-- <pre>{{notice}}</pre> -->
+    {{ notice.message }}
   </div>
 </template>
 
 <script>
+const $ = window.jQuery
 export default {
   name: "flash-messages",
   props: {
     notice: { type: Object }
   },
-  watch: {
-    notice () {
-      window.console.log('notice watcher...')
-      window.jQuery("#flash-messages-component").fadeTo(2000, 500).slideUp(500, function(){
-        window.jQuery("#flash-messages-component").slideUp(500);
+  updated () {
+    window.console.info('FlashMessages component updated')
+    this.fadeAway()
+  },
+  methods: {
+    fadeAway () {
+      $("#flash-messages-component").fadeTo(2000, 500).slideUp(500, function(){
+        $("#flash-messages-component").slideUp(500);
       });
     }
   }

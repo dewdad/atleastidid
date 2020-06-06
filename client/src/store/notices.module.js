@@ -14,4 +14,9 @@ export default {
       state.notices = []
     }
   },
+  actions: {
+    addNotice(context, notice) {
+      context.commit('addNotice', notice)
+    }
+  }
 }

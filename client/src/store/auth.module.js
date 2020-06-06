@@ -7,6 +7,7 @@ export default {
   namespaced: true,
   state: {
     error: null,
+    user: null,
     token: (token !== 'undefined') ? token : null,
     userLoggedIn: (token) ? true : false
   },
@@ -14,8 +15,9 @@ export default {
     loggedIn: (state) => state.userLoggedIn
   },
   mutations: {
-    setUserToken(state, token) {
+    setUserToken(state, token, user) {
       state.token = token
+      state.user = user
       localStorage.setItem('token', token)
       state.userLoggedIn = true
     },
@@ -24,24 +26,27 @@ export default {
     },
     resetUserToken(state) {
       state.token = null
+      state.user = null
       localStorage.clear()
       state.userLoggedIn = false
-    }
+    },
   },
   actions: {
     setAuthToken({ commit }, token) {
       commit('setUserToken', token)
     },
-    async login({ state, commit }, credentials) {
+    login({ state, commit }, credentials) {
       state.error = null
       commit('resetUserToken')
       commit('notices/clearNotices', null, { root: true })
-      await AuthServices.login(credentials).then(response => {
-        if (response.status === 200) {
+      AuthServices.login(credentials).then(response => {
+        if (response.status == 200) {
           commit('notices/addNotice', {
-            message: `Welcome, ${response.data.user.email}!`
+            message: `Welcome, ${response.data.user.email}!`,
+            status: response.status,
+            type: 'success'
           }, { root: true })
-          commit('setUserToken', response.data.token)
+          commit('setUserToken', response.data.token, response.data.user)
         }
       }).catch(errorResponse => {
         const error = {

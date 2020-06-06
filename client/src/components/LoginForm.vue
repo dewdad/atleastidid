@@ -57,34 +57,46 @@
 </template>
 
 <script>
-import AuthService from '@/services/auth'
+// import AuthService from '@/services/auth'
 export default {
   name: "login-form",
   data() {
     return {
       email: null,
-      password: null
+      password: null,
+      error: null
     };
   },
   methods: {
-    async login () {
+    loginSuccessful () {
+      window.console.log(this.$store.state.auth)
+      this.$store.dispatch('notices/addNotice', {
+        message: `Welcome back, ${this.$store}`,
+        status: 200,
+        type: 'success'
+      })
+      return this.$router.push({ name: 'list-tasks' })
+    },
+
+    login () {
       try {
-        let creds = { email: this.email, password: this.password }
-        const response = await AuthService.login(creds)
-        if (response.status === 200) {
-          this.$store
-            .dispatch('auth/setAuthToken', response.data.token)
-            .then(() => this.$router.push({ name: 'list-tasks' }))
-          window.location.reload
-        }
+        this.$store.dispatch('auth/login', this.$data)
       } catch(err) {
-        this.error = err
+        this.error = {
+          message: err.message,
+          status: err.response.status
+        }
+        this.$store.dispatch('notices/addNotice', {
+          message: err.message,
+          status: err.response.status,
+          type: 'danger'
+        })
         window.console.error(err)
       }
     }
   },
   computed: {
-    error() {
+    errors() {
       return this.$store.state.auth.error;
     }
   }

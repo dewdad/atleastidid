@@ -11,10 +11,8 @@ export default {
   name: 'login',
   data () {
     return {
-      username: null,
       email: null,
-      password: null,
-      error: null
+      password: null
     }
   },
   components: { LoginForm },
