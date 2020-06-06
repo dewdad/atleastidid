@@ -70,17 +70,14 @@ export default {
   methods: {
     loginSuccessful () {
       window.console.log(this.$store.state.auth)
-      this.$store.dispatch('notices/addNotice', {
-        message: `Welcome back, ${this.$store}`,
-        status: 200,
-        type: 'success'
-      })
       return this.$router.push({ name: 'list-tasks' })
     },
 
-    login () {
+    async login () {
       try {
-        this.$store.dispatch('auth/login', this.$data)
+        let res = await this.$store.dispatch('auth/login', this.$data)
+        if (res.status == 200) this.loginSuccessful()
+        window.console.log('>>>', res)
       } catch(err) {
         this.error = {
           message: err.message,

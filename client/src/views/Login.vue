@@ -6,7 +6,6 @@
 
 <script>
 import LoginForm from '@/components/LoginForm'
-import AuthService from '@/services/auth'
 export default {
   name: 'login',
   data () {
@@ -16,23 +15,6 @@ export default {
     }
   },
   components: { LoginForm },
-  methods: {
-    async login () {
-      try {
-        let creds = { email: this.email, password: this.password }
-        const response = await AuthService.login(creds)
-        if (response.status === 200) {
-          this.$store
-            .dispatch('auth/setAuthToken', response.data.token)
-            .then(() => this.$router.push({ name: 'list-tasks' }))
-          window.location.reload
-        }
-      } catch(err) {
-        this.error = err
-        window.console.error(err)
-      }
-    }
-  }
 }
 </script>
 

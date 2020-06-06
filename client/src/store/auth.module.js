@@ -39,21 +39,20 @@ export default {
       state.error = null
       commit('resetUserToken')
       commit('notices/clearNotices', null, { root: true })
-      AuthServices.login(credentials).then(response => {
-        if (response.status == 200) {
-          commit('notices/addNotice', {
-            message: `Welcome, ${response.data.user.email}!`,
-            status: response.status,
-            type: 'success'
-          }, { root: true })
-          commit('setUserToken', response.data.token, response.data.user)
-        }
+      return AuthServices.login(credentials).then(response => {
+        commit('notices/addNotice', {
+          message: `Welcome, ${response.data.user.email}!`,
+          status: response.status,
+          type: 'success'
+        }, { root: true })
+        commit('setUserToken', response.data.token, response.data.user)
+        return response
       }).catch(errorResponse => {
-        const error = {
+        commit('setLoginError', {
           status: errorResponse.response.data.status,
           message: errorResponse.response.data.message
-        }
-        commit('setLoginError', error)
+        })
+        return errorResponse
       })
     },
     async logout({ commit }) {
