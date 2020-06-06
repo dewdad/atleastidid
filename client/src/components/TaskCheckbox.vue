@@ -1,5 +1,5 @@
 <template>
-  <label for class="d-flex align-items-center">
+  <label for class="d-flex align-items-center mb-0">
     Completed?
     <input type="checkbox" class="form-control-sm ml-3" v-model="completed" />
   </label>
