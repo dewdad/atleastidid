@@ -57,7 +57,7 @@
 </template>
 
 <script>
-// import AuthService from '@/services/auth'
+import AuthService from '@/services/auth'
 export default {
   name: "login-form",
   data() {
@@ -67,8 +67,20 @@ export default {
     };
   },
   methods: {
-    async login() {
-      this.$store.dispatch("auth/login", { ...this.$data })
+    async login () {
+      try {
+        let creds = { email: this.email, password: this.password }
+        const response = await AuthService.login(creds)
+        if (response.status === 200) {
+          this.$store
+            .dispatch('auth/setAuthToken', response.data.token)
+            .then(() => this.$router.push({ name: 'list-tasks' }))
+          window.location.reload
+        }
+      } catch(err) {
+        this.error = err
+        window.console.error(err)
+      }
     }
   },
   computed: {
