@@ -11,6 +11,33 @@
   font-family: 'IBM-Plex-Sans-SemiBold';
   src: url('fonts/IBMPlexSans-SemiBold.ttf');
 }
+@font-face {
+  font-family: 'Lato-Regular';
+  src: url('fonts/Lato-Regular.ttf')
+}
+@font-face {
+  font-family: 'Lato-Bold';
+  src: url('fonts/Lato-Bold.ttf');
+}
+
+h1, h2, h3,
+h4, h5, h6 {
+  font-family: 'Lato-Bold';
+}
+
+body {
+  font-family: 'Lato-Regular';
+  font-size: 16px;
+}
+
+@media screen and (max-width: 992px) {
+  #branding > div {
+    margin: auto;
+    width: 216px;
+    display: block;
+    text-align: center;
+  }
+}
 
 .branding-title,
 .branding-title + small {
