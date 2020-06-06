@@ -1,5 +1,9 @@
 <template>
-  <form class="home-hero-signup" accept-charset="UTF-8" method="post">
+  <form
+    class="login-form rounded border py-4 px-4 px-md-3 px-lg-4"
+    accept-charset="UTF-8"
+    method="post"
+    @submit.prevent="login">
     <fieldset class="form-group">
       <dl class="form-group errored">
         <dt class="input-label">
@@ -44,7 +48,6 @@
         'btn btn-success f4 btn-block my-3': email && password
       }"
       type="submit"
-      @click.prevent="login"
     >Login</button>
     <p class="form-control-note mb-0 mt-3">
       If you already have an account with us click the "Login" button above to enter your dashboard.
