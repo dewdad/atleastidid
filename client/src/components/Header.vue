@@ -8,42 +8,29 @@
             <small>.com</small>
           </router-link>
         </div>
-        <nav id="nav" class="col d-lg-flex flex-row-reverse text-white">
-          <span class="mx-2">
-            <router-link
-              to="/"
-              class="btn btn-primary">
-              {{ !$helpers.loggedIn() ? 'Home' : 'Dashboard' }}
-            </router-link>
-          </span>
-          <span 
+        <nav id="nav" class="col d-lg-flex justify-content-end">
+          <router-link
+            to="/"
+            class="nav-link btn btn-primary mr-1 mb-1">
+            {{ !$helpers.loggedIn() ? 'Home' : 'Dashboard' }}
+          </router-link>
+          <router-link
             v-if="!$helpers.loggedIn()"
-            class="mx-2">
-            <router-link
-              to="/login"
-              class="btn btn-primary">Login</router-link>
-          </span>
-          <span 
+            to="/login"
+            class="nav-link btn btn-primary mr-1 mb-1">Login</router-link>
+          <router-link
             v-if="!$helpers.loggedIn()"
-            class="mx-2">
-            <router-link
-              to="/register"
-              class="btn btn-primary">Register</router-link>
-          </span>
-          <span 
+            to="/register"
+            class="nav-link btn btn-primary mr-1 mb-1">Register</router-link>
+          <router-link
             v-if="$helpers.loggedIn()"
-            class="mx-2">
-            <router-link
-              to="/add-task"
-              class="btn btn-success">Add a Task</router-link>
-          </span>
-          <span
-            v-if="$helpers.loggedIn()" 
-            class="mx-2">
-            <a @click.prevent="logout" class="btn btn-danger">Logout</a>
-          </span>
+            to="/add-task"
+            class="nav-link btn btn-primary mr-1 mb-1">Add a Task</router-link>
+          <a
+            v-if="$helpers.loggedIn()"
+            class="nav-link btn btn-primary mb-1"
+            @click.prevent="logout">Logout</a>
         </nav>
-
       </div>
     </header>
   </div>
