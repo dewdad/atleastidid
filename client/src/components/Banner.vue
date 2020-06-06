@@ -12,7 +12,7 @@
         </jumbotron>
         <!-- ./Jumbotron -->
         <!-- Register Form -->
-        <div class="mx-auto hide-sm" style="width: 400px">
+        <div class="mx-auto hide-sm" :style="{ 'width': '100%', 'max-width': '400px' }">
           <login-form v-if="!$helpers.loggedIn()" />
         </div>
         <div class="d-sm-none text-center">
