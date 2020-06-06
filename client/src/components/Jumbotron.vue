@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-7 text-center text-md-left">
+  <div class="col text-center text-md-left">
     <h1 class="page-title mb-3">{{ title }}</h1>
     <slot></slot>
   </div>
