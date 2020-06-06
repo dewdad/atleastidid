@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-12 py-6 py-sm-8">
+  <div class="col-md-12 py-3 py-sm-8">
     <div class="container-lg p-responsive position-relative">
       <div class="jumbo-registration-wrapper d-md-flex flex-items-center align-items-center">
         <!-- Jumbotron -->
@@ -12,10 +12,8 @@
         </jumbotron>
         <!-- ./Jumbotron -->
         <!-- Register Form -->
-        <div class="mx-auto hide-sm">
-          <div class="rounded-bottom border py-4 px-4 px-md-3 px-lg-4">
-            <login-form v-if="!$helpers.loggedIn()" />
-          </div>
+        <div class="mx-auto hide-sm" style="width: 400px">
+          <login-form v-if="!$helpers.loggedIn()" />
         </div>
         <div class="d-sm-none text-center">
           <a
