@@ -40,7 +40,7 @@ app.use(errorhandler())
 app.use(morgan('common'))
 if (environment == 'production') {
   var corsOptions = {
-    origin: ['atleastidid.com', 'www.atleastidid.com'],
+    origin: ['https://198.211.96.108:4000', 'atleastidid.com', 'www.atleastidid.com'],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
     credentials: true,
