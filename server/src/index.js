@@ -40,13 +40,18 @@ app.use(errorhandler())
 app.use(morgan('common'))
 if (environment == 'production') {
   var corsOptions = {
-    origin: '*',
+    origin: true,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
     credentials: true,
     sameSite: true,
     optionsSuccessStatus: 204
   }
+  app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "atleastidid.com"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
 } else {
   var corsOptions = {
     origin: true,
