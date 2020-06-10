@@ -40,12 +40,12 @@ app.use(errorhandler())
 app.use(morgan('common'))
 if (environment == 'production') {
   var corsOptions = {
-    origin: ['https://atleastidid.com', 'https://198.211.96.108:4000/api/v1/login'],
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    preflightContinue: false,
-    credentials: true,
-    sameSite: true,
-    optionsSuccessStatus: 204
+    // origin: ['https://atleastidid.com', 'https://198.211.96.108:4000/api/v1/login'],
+    // methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    // preflightContinue: false,
+    // credentials: true,
+    // sameSite: true,
+    // optionsSuccessStatus: 204
   }
 } else {
   var corsOptions = {
@@ -53,7 +53,7 @@ if (environment == 'production') {
     credentials: true
   }
 }
-app.use(cors(corsOptions))
+app.use(cors(/*corsOptions*/))
 app.use(express.static(__dirname + '/public'))
 
 // Routes
