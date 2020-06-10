@@ -40,8 +40,7 @@ app.use(errorhandler())
 app.use(morgan('common'))
 if (environment == 'production') {
   var corsOptions = {
-    allowedHeaders: ['Content-Type'],
-    origin: '*',
+    origin: ['https://198.211.96.108:4000'],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
     credentials: true,
