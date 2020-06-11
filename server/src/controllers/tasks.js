@@ -93,6 +93,21 @@ module.exports = {
       })
     }
   },
+  async getTask(req, res) {
+    console.log('\n\n getTask controller called!\n')
+    console.log('request params:', req.params)
+    try {
+      let task = await Task.findOne({ _id: req.params.id })
+      console.log('task:', task)
+      return res.status(200).send({ task })
+    } catch (err) {
+      console.log(err)
+      res.status(500).send({
+        error: err,
+        message: `Error fetching task: ${req.params.id}`
+      })
+    }
+  },
   async index(req, res) {
     try {
       let tasks = await Task.findAll({
