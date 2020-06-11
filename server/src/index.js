@@ -4,14 +4,20 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const errorhandler = require('errorhandler')
 const PORT = require('./config').port
-
+const https = require('https')
+const fs = require('fs')
 const session = require('express-session')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const sessionSecret = require('./config').session.secret
 
-
 const models = require('./models')
 const app = express()
+
+// serve the API with signed certificate on 443 (SSL/HTTPS) port
+const httpsServer = https.createServer({
+  key: fs.readFileSync('/etc/letsencrypt/live/atleastidid.com/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/atleastidid.com/fullchain.pem'),
+}, app);
 
 const sessionStore = new SequelizeStore({
   db: models.sequelizeInstance
@@ -80,7 +86,10 @@ if (environment !== 'production') {
 }
 
 models.sequelizeInstance.sync().then(() => {
-  app.listen(PORT, () => {
-    console.log('app web server listenting on port:', PORT)
-  })
+  // app.listen(PORT, () => {
+  //   console.log('app web server listenting on port:', PORT)
+  // })
+  httpsServer.listen(443, () => {
+    console.log('HTTPS Server running on port 443');
+  });
 })
