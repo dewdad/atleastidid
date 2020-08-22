@@ -1,9 +1,11 @@
+const config = require('./config')
+console.debug('(index.js)-[line: #2] config =>', config)
 const express = require('express')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const errorhandler = require('errorhandler')
-const PORT = require('./config').port
+const PORT = config.port
 
 const session = require('express-session')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)

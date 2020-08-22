@@ -1,30 +1,26 @@
 import Api from './api'
 
-const DEFAULT_HEADERS = {
-  'Authorization': `Bearer ${localStorage.getItem('token')}`,
-}
 export default {
   async toggleCompleted(id, value) {
-    DEFAULT_HEADERS['Cookie'] = document.cookie
     return Api().post(
       `/tasks/${id}/complete`,
       { complete: value },
-      { headers: DEFAULT_HEADERS }
+      { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
     )
   },
   async getAddTaskView() {
-    return Api().get('/tasks/add', { headers: DEFAULT_HEADERS })
+    return Api().get('/tasks/add', { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } })
   },
   async createTask(task) {
-    return Api().post('/tasks', task, { headers: DEFAULT_HEADERS })
+    return Api().post('/tasks', task, { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } })
   },
   async getAllTasks() {
-    return Api().get('tasks', { headers: DEFAULT_HEADERS })
+    return Api().get('tasks', { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } })
   },
   async deleteTask(id) {
-    return Api().delete('tasks/' + id, { headers: DEFAULT_HEADERS })
+    return Api().delete('tasks/' + id, { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } })
   },
   async getTask(id) {
-    return Api().get(`task/${id}`, { headers: DEFAULT_HEADERS })
+    return Api().get(`task/${id}`, { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } })
   }
 }

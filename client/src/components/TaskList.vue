@@ -70,7 +70,7 @@
         </div>
       </template>
     </div>
-    <div v-else>
+    <div v-if="loading == false && tasks.length == 0">
       <div class="alert alert-danger mt-1">You haven't created a task yet :(</div>
       <router-link tag="a" to="/add-task">Click here</router-link> to create your first task!
     </div>
@@ -86,6 +86,9 @@
 <script>
 import TaskCheckbox from "@/components/TaskCheckbox";
 import TasksService from "@/services/tasks";
+
+import { mapGetters } from 'vuex'
+
 export default {
   name: "tasks-list",
   data() {
@@ -97,6 +100,7 @@ export default {
   },
   components: { TaskCheckbox },
   computed: {
+    ...mapGetters({ loggedIn: 'auth/loggedIn' }),
     hasTasks() {
       if (this.tasks.length > 0) return true;
       return false;
@@ -116,28 +120,32 @@ export default {
     },
     async fetchAllTasks() {
       try {
-        let response = await TasksService.getAllTasks();
+        let response = await TasksService.getAllTasks()
         if (response.status == 200) {
-          this.tasks = response.data.tasks;
-          this.loading = false;
+          this.tasks = response.data.tasks
+          this.loading = false
         }
       } catch (err) {
-        window.console.error(err);
+        window.console.error(err)
       }
     },
     async deleteTask(id) {
       try {
         let response = await TasksService.deleteTask(id);
         if (response.status == 200) {
-          await this.fetchAllTasks();
+          await this.fetchAllTasks()
         }
       } catch (err) {
-        window.console.error(err);
+        window.console.error(err)
       }
     }
   },
   mounted() {
-    if (this.$store.state.auth.userLoggedIn) this.fetchAllTasks();
+    setTimeout( () => {
+      if (this.loggedIn) {
+        this.fetchAllTasks()
+      }
+    }, 3000)
   }
 };
 </script>

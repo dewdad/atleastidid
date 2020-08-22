@@ -1,15 +1,13 @@
 import AuthServices from '@/services/auth'
 import UserServices from '@/services/user'
 
-const token = localStorage.getItem('token')
-
 export default {
   namespaced: true,
   state: {
     error: null,
     user: null,
-    token: (token !== 'undefined') ? token : null,
-    userLoggedIn: (token) ? true : false
+    token: localStorage.getItem('token') || null,
+    userLoggedIn: localStorage.getItem('token') ? true : false
   },
   getters: {
     loggedIn: (state) => state.userLoggedIn
@@ -18,7 +16,6 @@ export default {
     setUserToken(state, token, user) {
       state.token = token
       state.user = user
-      localStorage.setItem('token', token)
       state.userLoggedIn = true
     },
     setLoginError(state, error) {
@@ -40,12 +37,19 @@ export default {
       commit('resetUserToken')
       commit('notices/clearNotices', null, { root: true })
       return AuthServices.login(credentials).then(response => {
+
+        window.console.debug('(client/src/store/auth.module.js)-[line: #41] response.data =>', response.data)
+
+        localStorage.setItem('token', response.data.token)
+        
         commit('notices/addNotice', {
           message: `Welcome, ${response.data.user.email}!`,
           status: response.status,
           type: 'success'
         }, { root: true })
+        
         commit('setUserToken', response.data.token, response.data.user)
+        
         return response
       }).catch(errorResponse => {
         commit('setLoginError', {
@@ -68,9 +72,13 @@ export default {
     },
     async checkUserState({ commit, state }) {
       if (state.token) {
+        localStorage.setItem('token', state.token)
         await UserServices.statUser().then(response => {
-          window.console.log('checkUserState (action):', response)
-          window.console.log('user is authenticated in system')
+          if (response.data.user) {
+            window.console.log('(client/src/store/auth.module.js)-[line: #77] response.data.user =>', response.data.user)
+          } else {
+            commit('resetUserToken')
+          }
         }).catch(err => {
           commit('resetUserToken')
           window.console.log('user is not authenticated in system', err)
